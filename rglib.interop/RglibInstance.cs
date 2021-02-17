@@ -17,7 +17,8 @@ namespace RglibInterop {
 
                 _delegates = new Delegates(_libraryHandle);
             }
-            catch {
+            catch (Exception ex) {
+                Console.WriteLine(ex.Message);
                 Release();
                 throw;
             }
@@ -102,14 +103,14 @@ namespace RglibInterop {
 
         /**
          * @brief Возвращает перечислитель доступных в системе совместимых портов
-         * @param lpPortEnumerator Указатель на дескриптор перечислителя портов
-         * @param aPortTypeMask Маска типов портов
+         * @param pEndPointListHandle Указатель на дескриптор перечислителя портов
+         * @param enpointTypeMask Маска типов точек подключения
          * @return код ошибки
          */
-        public error_t RG_EnumeratePorts(ref IntPtr lpPortEnumerator, byte aPortTypeMask, ref uint portsCount) {
+        public error_t RG_FindEndPoints(ref IntPtr pEndPointListHandle, byte enpointTypeMask, ref uint pCount) {
             if (_disposed)
                 throw new ObjectDisposedException(GetType().FullName);
-            return _delegates.RG_EnumeratePorts(ref lpPortEnumerator, aPortTypeMask, ref portsCount);
+            return _delegates.RG_FindEndPoints(ref pEndPointListHandle, enpointTypeMask, ref pCount);
         }
 
         /**

@@ -33,24 +33,24 @@ namespace rglib.wftest {
 
             _availablePorts.Clear();
             try {
-                IntPtr portListHandle = IntPtr.Zero;
-                uint portsListCount = 0;
-                byte portMask = (byte) (0 | (findUsbFlag ? 1 : 0) | (findHidFlag ? 2 : 0));
-                if (portMask > 0) {
+                IntPtr endPointsListHandle = IntPtr.Zero;
+                uint endpointsCount = 0;
+                byte endPointsMask = (byte) (0 | (findUsbFlag ? 1 : 0) | (findHidFlag ? 2 : 0));
+                if (endPointsMask > 0) {
                     uint errorCode =
-                        UnmanagedContext.Instance.RG_EnumeratePorts(ref portListHandle, portMask, ref portsListCount);
+                        UnmanagedContext.Instance.RG_FindEndPoints(ref endPointsListHandle, endPointsMask, ref endpointsCount);
                     if (errorCode != 0)
-                        throw new ApiCallException("Ошибка при вызове RG_EnumeratePorts", errorCode);
+                        throw new ApiCallException("Ошибка при вызове RG_FindEndPoints", errorCode);
 
-                    if (portListHandle != IntPtr.Zero) {
+                    if (endPointsListHandle != IntPtr.Zero) {
                         RG_PORT_INFO portInfo = new RG_PORT_INFO();
                         uint portIndex = 0;
-                        while (UnmanagedContext.Instance.RG_GetPortInfo(portListHandle, portIndex, ref portInfo) == 0) {
+                        while (UnmanagedContext.Instance.RG_GetPortInfo(endPointsListHandle, portIndex, ref portInfo) == 0) {
                             _availablePorts.Add(new PortInfoBindingWrapper(portInfo));
                             portIndex++;
                         }
 
-                        UnmanagedContext.Instance.RG_CloseResource(portListHandle);
+                        UnmanagedContext.Instance.RG_CloseResource(endPointsListHandle);
                     }
                 }
             }

@@ -18,7 +18,7 @@ namespace RglibInterop {
     internal delegate error_t RG_CloseResourceDelegate(IntPtr pHandle);
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    internal delegate error_t RG_EnumeratePortsDelegate(ref IntPtr lpPortEnumerator, byte aPortTypeMask, ref uint portsCount);
+    internal delegate error_t RG_FindEndPointsDelegate(ref IntPtr pEndPointListHandle, byte enpointTypeMask, ref uint pCount);
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     internal delegate error_t RG_GetPortInfoDelegate(IntPtr pPortEnumerator, uint portIndex, [In, Out] ref RG_PORT_INFO pPortInfo);
@@ -129,7 +129,7 @@ namespace RglibInterop {
             internal static extern error_t RG_CloseResource(IntPtr pHandle);
 
             [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
-            internal static extern error_t RG_EnumeratePorts(ref IntPtr lpPortEnumerator, byte aPortTypeMask, ref uint portsCount);
+            internal static extern error_t RG_FindEndPoints(ref IntPtr pEndPointListHandle, byte enpointTypeMask, ref uint pCount);
 
             [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
             internal static extern error_t RG_GetPortInfo(IntPtr pPortEnumerator, uint portIndex, [In, Out] ref RG_PORT_INFO pPortInfo);
@@ -233,7 +233,7 @@ namespace RglibInterop {
 
         internal RG_CloseResourceDelegate RG_CloseResource = null;
 
-        internal RG_EnumeratePortsDelegate RG_EnumeratePorts = null;
+        internal RG_FindEndPointsDelegate RG_FindEndPoints = null;
 
         internal RG_GetPortInfoDelegate RG_GetPortInfo = null;
 
@@ -293,9 +293,9 @@ namespace RglibInterop {
                 UnmanagedLibrary.GetDelegateForFunctionPointer<RG_CloseResourceDelegate>(
                     UnmanagedLibrary.GetFunctionPointer(libraryHandle, "RG_CloseResource"));
 
-            RG_EnumeratePorts =
-                UnmanagedLibrary.GetDelegateForFunctionPointer<RG_EnumeratePortsDelegate>(
-                    UnmanagedLibrary.GetFunctionPointer(libraryHandle, "RG_EnumeratePorts"));
+            RG_FindEndPoints =
+                UnmanagedLibrary.GetDelegateForFunctionPointer<RG_FindEndPointsDelegate>(
+                    UnmanagedLibrary.GetFunctionPointer(libraryHandle, "RG_FindEndPoints"));
 
             RG_GetPortInfo =
                 UnmanagedLibrary.GetDelegateForFunctionPointer<RG_GetPortInfoDelegate>(
@@ -365,7 +365,7 @@ namespace RglibInterop {
             RG_InitializeLib = LibNativeMethods.RG_InitializeLib;
             RG_Uninitialize = LibNativeMethods.RG_Uninitialize;
             RG_CloseResource = LibNativeMethods.RG_CloseResource;
-            RG_EnumeratePorts = LibNativeMethods.RG_EnumeratePorts;
+            RG_FindEndPoints = LibNativeMethods.RG_FindEndPoints;
             RG_GetPortInfo = LibNativeMethods.RG_GetPortInfo;
 
             RG_EnumerateDevices = LibNativeMethods.RG_EnumerateDevices;
