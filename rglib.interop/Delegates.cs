@@ -27,7 +27,7 @@ namespace RglibInterop {
     internal delegate error_t RG_FindDevicesDelegate(ref IntPtr pDevicesListHandle, ref uint pCount);
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    internal delegate error_t RG_GetNextDeviceInfoDelegate(IntPtr pDeviceEnumerator, uint deviceIndex, [In, Out] ref RG_DEVICE_INFO pDeviceInfo);
+    internal delegate error_t RG_GetFoundDeviceInfoDelegate(IntPtr pDevicesListHandle, uint deviceIndex, [In, Out] ref RG_DEVICE_INFO pEndpointInfo);
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     internal delegate error_t RG_InitDeviceDelegate([In] ref RG_PORT_ENDPOINT pPortEp, byte deviceAddress);
@@ -138,7 +138,7 @@ namespace RglibInterop {
             internal static extern error_t RG_FindDevices(ref IntPtr pDevicesListHandle, ref uint pCount);
 
             [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
-            internal static extern error_t RG_GetNextDeviceInfo(IntPtr pDeviceEnumerator, uint deviceIndex, [In, Out] ref RG_DEVICE_INFO pDeviceInfo);
+            internal static extern error_t RG_GetFoundDeviceInfo(IntPtr pDeviceEnumerator, uint deviceIndex, [In, Out] ref RG_DEVICE_INFO pDeviceInfo);
 
             [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
             internal static extern error_t RG_InitDevice([In] ref RG_PORT_ENDPOINT pPortEp, byte deviceAddress);
@@ -239,7 +239,7 @@ namespace RglibInterop {
 
         internal RG_FindDevicesDelegate RG_FindDevices = null;
 
-        internal RG_GetNextDeviceInfoDelegate RG_GetNextDeviceInfo = null;
+        internal RG_GetFoundDeviceInfoDelegate RG_GetFoundDeviceInfo = null;
 
         internal RG_InitDeviceDelegate RG_InitDevice = null;
 
@@ -306,9 +306,9 @@ namespace RglibInterop {
                 UnmanagedLibrary.GetDelegateForFunctionPointer<RG_FindDevicesDelegate>(
                     UnmanagedLibrary.GetFunctionPointer(libraryHandle, "RG_FindDevices"));
 
-            RG_GetNextDeviceInfo =
-                UnmanagedLibrary.GetDelegateForFunctionPointer<RG_GetNextDeviceInfoDelegate>(
-                    UnmanagedLibrary.GetFunctionPointer(libraryHandle, "RG_GetNextDeviceInfo"));
+            RG_GetFoundDeviceInfo =
+                UnmanagedLibrary.GetDelegateForFunctionPointer<RG_GetFoundDeviceInfoDelegate>(
+                    UnmanagedLibrary.GetFunctionPointer(libraryHandle, "RG_GetFoundDeviceInfo"));
 
             RG_InitDevice =
                 UnmanagedLibrary.GetDelegateForFunctionPointer<RG_InitDeviceDelegate>(
@@ -369,7 +369,7 @@ namespace RglibInterop {
             RG_GetFoundEndPointInfo = LibNativeMethods.RG_GetFoundEndPointInfo;
 
             RG_FindDevices = LibNativeMethods.RG_FindDevices;
-            RG_GetNextDeviceInfo = LibNativeMethods.RG_GetNextDeviceInfo;
+            RG_GetFoundDeviceInfo = LibNativeMethods.RG_GetFoundDeviceInfo;
 
             RG_InitDevice = LibNativeMethods.RG_InitDevice;
             RG_GetDeviceInfo = LibNativeMethods.RG_GetDeviceInfo;

@@ -148,11 +148,11 @@ namespace RglibInterop {
          * @param pEndpointInfo Указатель на структуру с информацией о порте
          * @return Код ошибки
          */
-        public error_t RG_GetNextDeviceInfo(IntPtr pDeviceEnumerator, uint deviceIndex,
+        public error_t RG_GetFoundDeviceInfo(IntPtr pDeviceEnumerator, uint deviceIndex,
             ref RG_DEVICE_INFO pDeviceInfo) {
             if (_disposed)
                 throw new ObjectDisposedException(GetType().FullName);
-            return _delegates.RG_GetNextDeviceInfo(pDeviceEnumerator, deviceIndex, ref pDeviceInfo);
+            return _delegates.RG_GetFoundDeviceInfo(pDeviceEnumerator, deviceIndex, ref pDeviceInfo);
         }
 
         /**
