@@ -305,11 +305,11 @@ namespace RglibInterop {
          * @param timeoutSec время удержания состояния в сек. (0 - постоянно)
          * @return Код ошибки
          */
-        public error_t RG_SetControlOutState(ref RG_ENDPOINT pEndpoint, byte deviceAddress,
+        public error_t RG_SetControlOutputState(ref RG_ENDPOINT pEndpoint, byte deviceAddress,
             byte controlOutNumber, byte controlOutState, byte timeoutSec) {
             if (_disposed)
                 throw new ObjectDisposedException(GetType().FullName);
-            return _delegates.RG_SetControlOutState(ref pEndpoint, deviceAddress, controlOutNumber, controlOutState,
+            return _delegates.RG_SetControlOutputState(ref pEndpoint, deviceAddress, controlOutNumber, controlOutState,
                 timeoutSec);
         }
 

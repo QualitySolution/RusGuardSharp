@@ -577,7 +577,7 @@ namespace rglib.wftest {
                 RG_ENDPOINT portEndpoin = _currentConnectoinContext.ReaderPort;
                 byte address = _currentConnectoinContext.ReaderAddress;
 
-                uint errorCode = UnmanagedContext.Instance.RG_SetControlOutState(
+                uint errorCode = UnmanagedContext.Instance.RG_SetControlOutputState(
                     ref portEndpoin,
                     address,
                     1,

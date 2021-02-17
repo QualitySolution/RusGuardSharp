@@ -85,7 +85,7 @@ namespace RglibInterop {
         byte blueCodogrammNumber);
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    internal delegate error_t RG_SetControlOutStateDelegate(
+    internal delegate error_t RG_SetControlOutputStateDelegate(
         [In] ref RG_ENDPOINT pEndpoint, 
         byte deviceAddress,
         byte controlOutNumber, 
@@ -185,7 +185,7 @@ namespace RglibInterop {
                 byte blueCodogrammNumber);
 
             [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
-            internal static extern error_t RG_SetControlOutState(
+            internal static extern error_t RG_SetControlOutputState(
                 [In] ref RG_ENDPOINT pEndpoint,
                 byte deviceAddress,
                 byte controlOutNumber,
@@ -237,7 +237,7 @@ namespace RglibInterop {
 
         internal RG_StartCodogrammDelegate RG_StartCodogramm = null;
 
-        internal RG_SetControlOutStateDelegate RG_SetControlOutState = null;
+        internal RG_SetControlOutputStateDelegate RG_SetControlOutputState = null;
 
         internal RG_ReadBlockDirectDelegate RG_ReadBlockDirect = null;
 
@@ -322,9 +322,9 @@ namespace RglibInterop {
                 UnmanagedLibrary.GetDelegateForFunctionPointer<RG_StartCodogrammDelegate>(
                     UnmanagedLibrary.GetFunctionPointer(libraryHandle, "RG_StartCodogramm"));
 
-            RG_SetControlOutState =
-                UnmanagedLibrary.GetDelegateForFunctionPointer<RG_SetControlOutStateDelegate>(
-                    UnmanagedLibrary.GetFunctionPointer(libraryHandle, "RG_SetControlOutState"));
+            RG_SetControlOutputState =
+                UnmanagedLibrary.GetDelegateForFunctionPointer<RG_SetControlOutputStateDelegate>(
+                    UnmanagedLibrary.GetFunctionPointer(libraryHandle, "RG_SetControlOutputState"));
 
             RG_ReadBlockDirect =
                 UnmanagedLibrary.GetDelegateForFunctionPointer<RG_ReadBlockDirectDelegate>(
@@ -353,7 +353,7 @@ namespace RglibInterop {
             RG_WriteProfile = LibNativeMethods.RG_WriteProfile;
             RG_WriteCodogramm = LibNativeMethods.RG_WriteCodogramm;
             RG_StartCodogramm = LibNativeMethods.RG_StartCodogramm;
-            RG_SetControlOutState = LibNativeMethods.RG_SetControlOutState;
+            RG_SetControlOutputState = LibNativeMethods.RG_SetControlOutputState;
 
             RG_ReadBlockDirect = LibNativeMethods.RG_ReadBlockDirect;
         }
