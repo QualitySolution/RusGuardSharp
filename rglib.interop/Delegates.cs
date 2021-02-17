@@ -54,7 +54,7 @@ namespace RglibInterop {
         byte cardfamilyMask);
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    internal delegate error_t RG_ResetProfilesDelegate(
+    internal delegate error_t RG_ClearProfilesDelegate(
         [In] ref RG_ENDPOINT pEndpoint,
         byte deviceAddress);
 
@@ -161,7 +161,7 @@ namespace RglibInterop {
                 byte cardfamilyMask);
 
             [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
-            internal static extern error_t RG_ResetProfiles(
+            internal static extern error_t RG_ClearProfiles(
                 [In] ref RG_ENDPOINT pEndpoint,
                 byte deviceAddress);
 
@@ -243,7 +243,7 @@ namespace RglibInterop {
 
         internal RG_SetCardsMaskDelegate RG_SetCardsMask = null;
 
-        internal RG_ResetProfilesDelegate RG_ResetProfiles = null;
+        internal RG_ClearProfilesDelegate RG_ClearProfiles = null;
 
         internal RG_WriteProfileDelegate RG_WriteProfile = null;
 
@@ -322,9 +322,9 @@ namespace RglibInterop {
                 UnmanagedLibrary.GetDelegateForFunctionPointer<RG_SetCardsMaskDelegate>(
                     UnmanagedLibrary.GetFunctionPointer(libraryHandle, "RG_SetCardsMask"));
 
-            RG_ResetProfiles =
-                UnmanagedLibrary.GetDelegateForFunctionPointer<RG_ResetProfilesDelegate>(
-                    UnmanagedLibrary.GetFunctionPointer(libraryHandle, "RG_ResetProfiles"));
+            RG_ClearProfiles =
+                UnmanagedLibrary.GetDelegateForFunctionPointer<RG_ClearProfilesDelegate>(
+                    UnmanagedLibrary.GetFunctionPointer(libraryHandle, "RG_ClearProfiles"));
 
             RG_WriteProfile =
                 UnmanagedLibrary.GetDelegateForFunctionPointer<RG_WriteProfileDelegate>(
@@ -369,7 +369,7 @@ namespace RglibInterop {
             RG_GetStatus = LibNativeMethods.RG_GetStatus;
 
             RG_SetCardsMask = LibNativeMethods.RG_SetCardsMask;
-            RG_ResetProfiles = LibNativeMethods.RG_ResetProfiles;
+            RG_ClearProfiles = LibNativeMethods.RG_ClearProfiles;
             RG_WriteProfile = LibNativeMethods.RG_WriteProfile;
             RG_WriteCodogramm = LibNativeMethods.RG_WriteCodogramm;
             RG_StartInidication = LibNativeMethods.RG_StartInidication;

@@ -621,7 +621,7 @@ namespace rglib.wftest {
                         byte address = _currentConnectoinContext.ReaderAddress;
 
                         uint errorCode =
-                            UnmanagedContext.Instance.RG_ResetProfiles(ref portEndpoin, address);
+                            UnmanagedContext.Instance.RG_ClearProfiles(ref portEndpoin, address);
                         if (errorCode != 0) {
                             throw new ApiCallException("Ошибка при очистке профилей", errorCode);
                         }
@@ -698,7 +698,7 @@ namespace rglib.wftest {
                     byte address = _currentConnectoinContext.ReaderAddress;
 
                     uint errorCode =
-                        UnmanagedContext.Instance.RG_ResetProfiles(ref portEndpoin, address);
+                        UnmanagedContext.Instance.RG_ClearProfiles(ref portEndpoin, address);
                     if (errorCode != 0) {
                         throw new ApiCallException("Ошибка при очистке профилей", errorCode);
                     }
@@ -755,7 +755,7 @@ namespace rglib.wftest {
                     byte address = _currentConnectoinContext.ReaderAddress;
 
                     uint errorCode =
-                        UnmanagedContext.Instance.RG_ResetProfiles(ref portEndpoin, address);
+                        UnmanagedContext.Instance.RG_ClearProfiles(ref portEndpoin, address);
                     if (errorCode != 0) {
                         throw new ApiCallException("Ошибка при очистке профилей", errorCode);
                     }

@@ -234,10 +234,10 @@ namespace RglibInterop {
          * @param deviceAddress адрес устройства
          * @return Код ошибки
          */
-        public error_t RG_ResetProfiles(ref RG_ENDPOINT pEndpoint, byte deviceAddress) {
+        public error_t RG_ClearProfiles(ref RG_ENDPOINT pEndpoint, byte deviceAddress) {
             if (_disposed)
                 throw new ObjectDisposedException(GetType().FullName);
-            return _delegates.RG_ResetProfiles(ref pEndpoint, deviceAddress);
+            return _delegates.RG_ClearProfiles(ref pEndpoint, deviceAddress);
         }
 
         /**
