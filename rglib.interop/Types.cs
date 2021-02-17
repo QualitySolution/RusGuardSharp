@@ -203,23 +203,23 @@ namespace RglibInterop {
     /// <summary>
     /// 
     /// </summary>
-    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi, Pack = 1, Size = 65)]
-    public struct RG_PORT_INFO {
+    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi, Pack = 1, Size = 193)]
+    public struct RG_ENDPOINT_INFO {
         /// <summary>
         /// Тип подключения
         /// </summary>
         [MarshalAs(UnmanagedType.U1)] public RG_ENDPOINT_TYPE PortType;
 
         /// <summary>
-        /// Строка подключения
-        /// </summary>
-        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = lib_consts.MAX_STRING_LENGTH)]
-        public string ConnectionString;
+        /// Строка из 64 ASCII символов (включая завершающий 0) содержащая адрес подключения согласно типу подключения.
+                /// </summary>
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 64)]
+        public string Address;
 
         /// <summary>
         /// Отображаемое имя устройства (почти как в диспетчере windows)
         /// </summary>
-        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = lib_consts.MAX_STRING_LENGTH)]
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 128)]
         public string FriendlyName;
     }
 

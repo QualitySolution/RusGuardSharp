@@ -119,7 +119,7 @@ namespace RglibInterop {
          * @param pEndpointInfo Указатель на структуру с информацией о точке подключения
          * @return Код ошибки
          */
-        public error_t RG_GetFoundEndPointInfo(IntPtr endPointListHandle, uint listIndex, ref RG_PORT_INFO pEndpointInfo) {
+        public error_t RG_GetFoundEndPointInfo(IntPtr endPointListHandle, uint listIndex, ref RG_ENDPOINT_INFO pEndpointInfo) {
             if (_disposed)
                 throw new ObjectDisposedException(GetType().FullName);
             return _delegates.RG_GetFoundEndPointInfo(endPointListHandle, listIndex, ref pEndpointInfo);
@@ -148,7 +148,7 @@ namespace RglibInterop {
          * @param pEndpointInfo Указатель на структуру с информацией о порте
          * @return Код ошибки
          */
-        public error_t RG_GetFoundDeviceInfo(IntPtr pDeviceEnumerator, uint deviceIndex, ref RG_PORT_INFO pEndpointInfo, ref RG_DEVICE_INFO_EXT pDeviceInfoExt) {
+        public error_t RG_GetFoundDeviceInfo(IntPtr pDeviceEnumerator, uint deviceIndex, ref RG_ENDPOINT_INFO pEndpointInfo, ref RG_DEVICE_INFO_EXT pDeviceInfoExt) {
             if (_disposed)
                 throw new ObjectDisposedException(GetType().FullName);
             return _delegates.RG_GetFoundDeviceInfo(pDeviceEnumerator, deviceIndex, ref pEndpointInfo, ref pDeviceInfoExt);

@@ -2,11 +2,11 @@
 using RglibInterop;
 
 namespace rglib.wftest.Model {
-    public class PortInfoBindingWrapper  : BindingWrapper<RG_PORT_INFO> {
-        public PortInfoBindingWrapper(RG_PORT_INFO wrappedObject) : base(wrappedObject) { }
+    public class PortInfoBindingWrapper  : BindingWrapper<RG_ENDPOINT_INFO> {
+        public PortInfoBindingWrapper(RG_ENDPOINT_INFO wrappedObject) : base(wrappedObject) { }
 
         public string ConnectionString {
-            get { return WrappedObject.ConnectionString; }
+            get { return WrappedObject.Address; }
         }
 
         public RG_ENDPOINT_TYPE PortType {

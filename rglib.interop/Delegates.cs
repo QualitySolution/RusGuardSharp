@@ -21,13 +21,13 @@ namespace RglibInterop {
     internal delegate error_t RG_FindEndPointsDelegate(ref IntPtr pEndPointListHandle, byte enpointTypeMask, ref uint pCount);
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    internal delegate error_t RG_GetFoundEndPointInfoDelegate(IntPtr endPointListHandle, uint listIndex, [In, Out] ref RG_PORT_INFO pEndpointInfo);
+    internal delegate error_t RG_GetFoundEndPointInfoDelegate(IntPtr endPointListHandle, uint listIndex, [In, Out] ref RG_ENDPOINT_INFO pEndpointInfo);
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     internal delegate error_t RG_FindDevicesDelegate(ref IntPtr pDevicesListHandle, ref uint pCount);
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    internal delegate error_t RG_GetFoundDeviceInfoDelegate(IntPtr pDevicesListHandle, uint deviceIndex, [In, Out] ref RG_PORT_INFO pEndpointInfo, [In, Out] ref RG_DEVICE_INFO_EXT pDeviceInfoExt);
+    internal delegate error_t RG_GetFoundDeviceInfoDelegate(IntPtr pDevicesListHandle, uint deviceIndex, [In, Out] ref RG_ENDPOINT_INFO pEndpointInfo, [In, Out] ref RG_DEVICE_INFO_EXT pDeviceInfoExt);
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     internal delegate error_t RG_InitDeviceDelegate([In] ref RG_ENDPOINT pEndpoint, byte deviceAddress);
@@ -121,13 +121,13 @@ namespace RglibInterop {
             internal static extern error_t RG_FindEndPoints(ref IntPtr pEndPointListHandle, byte enpointTypeMask, ref uint pCount);
 
             [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
-            internal static extern error_t RG_GetFoundEndPointInfo(IntPtr pPortEnumerator, uint portIndex, [In, Out] ref RG_PORT_INFO pPortInfo);
+            internal static extern error_t RG_GetFoundEndPointInfo(IntPtr pPortEnumerator, uint portIndex, [In, Out] ref RG_ENDPOINT_INFO pEndpointInfo);
 
             [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
             internal static extern error_t RG_FindDevices(ref IntPtr pDevicesListHandle, ref uint pCount);
 
             [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
-            internal static extern error_t RG_GetFoundDeviceInfo(IntPtr pDeviceEnumerator, uint deviceIndex, [In, Out] ref RG_PORT_INFO pEndpointInfo, [In, Out] ref RG_DEVICE_INFO_EXT pDeviceInfoExt);
+            internal static extern error_t RG_GetFoundDeviceInfo(IntPtr pDeviceEnumerator, uint deviceIndex, [In, Out] ref RG_ENDPOINT_INFO pEndpointInfo, [In, Out] ref RG_DEVICE_INFO_EXT pDeviceInfoExt);
 
             [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
             internal static extern error_t RG_InitDevice([In] ref RG_ENDPOINT pEndpoint, byte deviceAddress);

@@ -43,7 +43,7 @@ namespace rglib.wftest {
                         throw new ApiCallException("Ошибка при вызове RG_FindEndPoints", errorCode);
 
                     if (endPointsListHandle != IntPtr.Zero) {
-                        RG_PORT_INFO portInfo = new RG_PORT_INFO();
+                        RG_ENDPOINT_INFO portInfo = new RG_ENDPOINT_INFO();
                         uint portIndex = 0;
                         while (UnmanagedContext.Instance.RG_GetFoundEndPointInfo(endPointsListHandle, portIndex, ref portInfo) == 0) {
                             _availablePorts.Add(new PortInfoBindingWrapper(portInfo));
