@@ -302,11 +302,14 @@ namespace rglib.wftest {
                     RG_PIN_SATETS_16 pinStates = new RG_PIN_SATETS_16();
                     RG_DEVICE_STATUS_TYPE statusType = RG_DEVICE_STATUS_TYPE.DS_UNKNONWN;
                     RG_CARD_INFO cardInfo = new RG_CARD_INFO() {CardType = RG_CARD_TYPE_CODE.CT_UNKNOWN};
-                    byte profileNum = 0;
-                    byte[] blockMemory = new byte[16];
+                    RG_CARD_MEMORY cardMemory = new RG_CARD_MEMORY
+                    {
+                        ProfileBlock = 0,
+                        MemBlock = new byte[16]
+                    };
 
-                    uint errorCode = UnmanagedContext.Instance.RG_GetDeviceStatus(ref portEndpoin, address,
-                        ref statusType, ref pinStates, ref cardInfo, ref profileNum, blockMemory);
+                    uint errorCode = UnmanagedContext.Instance.RG_GetStatus(ref portEndpoin, address,
+                        ref statusType, ref pinStates, ref cardInfo, ref cardMemory);
                     if (errorCode != 0 && statusType == RG_DEVICE_STATUS_TYPE.DS_UNKNONWN) {
                         throw new ApiCallException("Ошибка при запросе статуса устройства", errorCode);
                     }
@@ -342,12 +345,12 @@ namespace rglib.wftest {
                         case RG_DEVICE_STATUS_TYPE.DS_CARDAUTH: {
                             string enumFieldName = Enum.GetName(typeof(RG_CARD_TYPE_CODE), cardInfo.CardType);
                             string uidField = BitConverter.ToString(cardInfo.CardUid);
-                            string memoryData = BitConverter.ToString(blockMemory);
+                            string memoryData = BitConverter.ToString(cardMemory.MemBlock);
 
                             cardCodeTextBox.Text = ((byte) cardInfo.CardType).ToString("X2");
                             cardTypeTextBox.Text = enumFieldName;
                             cardUidTextBox.Text = uidField;
-                            profileNumBox.Text = profileNum.ToString();
+                            profileNumBox.Text = cardMemory.ProfileBlock.ToString();
                             cardMemoryTextBox.Text = memoryData;
 
                             break;
@@ -420,11 +423,14 @@ namespace rglib.wftest {
                         RG_PIN_SATETS_16 pinStates = new RG_PIN_SATETS_16();
                         RG_DEVICE_STATUS_TYPE statusType = RG_DEVICE_STATUS_TYPE.DS_UNKNONWN;
                         RG_CARD_INFO cardInfo = new RG_CARD_INFO() {CardType = RG_CARD_TYPE_CODE.CT_UNKNOWN};
-                        byte profileNum = 0;
-                        byte[] blockMemory = new byte[16];
+                        RG_CARD_MEMORY cardMemory = new RG_CARD_MEMORY()
+                        {
+                            ProfileBlock = 0,
+                            MemBlock = new byte[16]
+                        };
 
-                        uint errorCode = UnmanagedContext.Instance.RG_GetDeviceStatus(ref portEndpoin, address,
-                            ref statusType, ref pinStates, ref cardInfo, ref profileNum, blockMemory);
+                        uint errorCode = UnmanagedContext.Instance.RG_GetStatus(ref portEndpoin, address,
+                            ref statusType, ref pinStates, ref cardInfo, ref cardMemory);
                         if (errorCode != 0 && statusType == RG_DEVICE_STATUS_TYPE.DS_UNKNONWN) {
                             throw new ApiCallException("Ошибка при запросе статуса устройства", errorCode);
                         }
@@ -467,13 +473,13 @@ namespace rglib.wftest {
                             case RG_DEVICE_STATUS_TYPE.DS_CARDAUTH: {
                                 string enumFieldName = Enum.GetName(typeof(RG_CARD_TYPE_CODE), cardInfo.CardType);
                                 string uidField = BitConverter.ToString(cardInfo.CardUid);
-                                string memoryData = BitConverter.ToString(blockMemory);
+                                string memoryData = BitConverter.ToString(cardMemory.MemBlock);
 
                                 readerDataGroup.InvokeIfRequired(() => {
                                     cardCodeTextBox.Text = ((byte) cardInfo.CardType).ToString("X2");
                                     cardTypeTextBox.Text = enumFieldName;
                                     cardUidTextBox.Text = uidField;
-                                    profileNumBox.Text = profileNum.ToString();
+                                    profileNumBox.Text = cardMemory.ProfileBlock.ToString();
                                     cardMemoryTextBox.Text = memoryData;
                                 });
 

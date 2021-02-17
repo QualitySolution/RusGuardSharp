@@ -39,20 +39,13 @@ namespace RglibInterop {
     internal delegate error_t RG_GetInfoExtDelegate(ref RG_PORT_ENDPOINT pEndPoint, byte deviceAddress, [In, Out] ref RG_DEVICE_INFO_EXT pDeviceInfo);
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    internal delegate error_t RG_GetDeviceStatusDelegate(
+    internal delegate error_t RG_GetStatusDelegate(
         [In] ref RG_PORT_ENDPOINT pPortEp,
         byte deviceAddress,
         [In, Out, MarshalAs(UnmanagedType.U1)] ref RG_DEVICE_STATUS_TYPE pStatusType,
         [In, Out] ref RG_PIN_SATETS_16 pinStates,
-        [In, Out] ref RG_CARD_INFO carDinfo,
-        [In, Out] ref byte profileNum,
-        [In, Out] byte[] memBlock);
-
-    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    internal delegate error_t RG_RequestCardDelegate(
-        [In] ref RG_PORT_ENDPOINT pPortEp,
-        byte deviceAddress,
-        [In, Out] ref RG_CARD_INFO carDinfo);
+        [In, Out] ref RG_CARD_INFO cardInfo,
+        [In, Out] ref RG_CARD_MEMORY cardMemory);
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     internal delegate error_t RG_SetCardMaskDelegate(
@@ -153,20 +146,13 @@ namespace RglibInterop {
             internal static extern error_t RG_GetInfoExt(ref RG_PORT_ENDPOINT pEndPoint, byte deviceAddress, [In, Out] ref RG_DEVICE_INFO_EXT pDeviceInfo);
 
             [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
-            internal static extern error_t RG_GetDeviceStatus(
+            internal static extern error_t RG_GetStatus(
                 [In] ref RG_PORT_ENDPOINT pPortEp,
                 byte deviceAddress,
                 [In, Out, MarshalAs(UnmanagedType.U1)] ref RG_DEVICE_STATUS_TYPE pStatusType,
                 [In, Out] ref RG_PIN_SATETS_16 pinStates,
                 [In, Out] ref RG_CARD_INFO pCardInfo,
-                [In, Out] ref byte profileNum,
-                [In, Out] byte[] memBlock);
-
-            [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
-            internal static extern error_t RG_RequestCard(
-                [In] ref RG_PORT_ENDPOINT pPortEp,
-                byte deviceAddress,
-                [In, Out] ref RG_CARD_INFO carDinfo);
+                [In, Out] ref RG_CARD_MEMORY pCardMemory);
 
             [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
             internal static extern error_t RG_SetCardMask(
@@ -253,9 +239,7 @@ namespace RglibInterop {
 
         internal RG_GetInfoExtDelegate RG_GetInfoExt = null;
 
-        internal RG_GetDeviceStatusDelegate RG_GetDeviceStatus = null;
-
-        internal RG_RequestCardDelegate RG_RequestCard = null;
+        internal RG_GetStatusDelegate RG_GetStatus = null;
 
         internal RG_SetCardMaskDelegate RG_SetCardMask = null;
 
@@ -330,13 +314,9 @@ namespace RglibInterop {
                 UnmanagedLibrary.GetDelegateForFunctionPointer<RG_GetInfoExtDelegate>(
                     UnmanagedLibrary.GetFunctionPointer(libraryHandle, "RG_GetInfoExt"));
 
-            RG_GetDeviceStatus =
-                UnmanagedLibrary.GetDelegateForFunctionPointer<RG_GetDeviceStatusDelegate>(
-                    UnmanagedLibrary.GetFunctionPointer(libraryHandle, "RG_GetDeviceStatus"));
-
-            //TODO: новое
-            RG_RequestCard = UnmanagedLibrary.GetDelegateForFunctionPointer<RG_RequestCardDelegate>(
-                UnmanagedLibrary.GetFunctionPointer(libraryHandle, "RG_RequestCard"));
+            RG_GetStatus =
+                UnmanagedLibrary.GetDelegateForFunctionPointer<RG_GetStatusDelegate>(
+                    UnmanagedLibrary.GetFunctionPointer(libraryHandle, "RG_GetStatus"));
 
             RG_SetCardMask =
                 UnmanagedLibrary.GetDelegateForFunctionPointer<RG_SetCardMaskDelegate>(
@@ -386,9 +366,7 @@ namespace RglibInterop {
             RG_InitDevice = LibNativeMethods.RG_InitDevice;
             RG_GetInfo = LibNativeMethods.RG_GetInfo;
             RG_GetInfoExt = LibNativeMethods.RG_GetInfoExt;
-            RG_GetDeviceStatus = LibNativeMethods.RG_GetDeviceStatus;
-
-            RG_RequestCard = LibNativeMethods.RG_RequestCard;
+            RG_GetStatus = LibNativeMethods.RG_GetStatus;
 
             RG_SetCardMask = LibNativeMethods.RG_SetCardMask;
             RG_ResetProfiles = LibNativeMethods.RG_ResetProfiles;

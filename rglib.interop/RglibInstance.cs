@@ -202,28 +202,17 @@ namespace RglibInterop {
         * @param pMemBlock указатель на структуру данных о памяти блока
         * @return Код ошибки
            */
-        public error_t RG_GetDeviceStatus(
-            ref RG_PORT_ENDPOINT pPortEp,
+        public error_t RG_GetStatus(
+            ref RG_PORT_ENDPOINT pEndPoint,
             byte deviceAddress,
             ref RG_DEVICE_STATUS_TYPE pStatusType,
             ref RG_PIN_SATETS_16 pinStates,
-            ref RG_CARD_INFO carDinfo,
-            ref byte profileNum,
-            byte[] memBlock)
+            ref RG_CARD_INFO cardInfo,
+            ref RG_CARD_MEMORY cardMemory)
         {
             if (_disposed)
                 throw new ObjectDisposedException(GetType().FullName);
-            return _delegates.RG_GetDeviceStatus(ref pPortEp, deviceAddress, ref pStatusType, ref pinStates, ref carDinfo, ref profileNum, memBlock);
-        }
-
-
-        public error_t RG_RequestCard(
-            ref RG_PORT_ENDPOINT pPortEp,
-            byte deviceAddress,
-            ref RG_CARD_INFO carDinfo) {
-            if (_disposed)
-                throw new ObjectDisposedException(GetType().FullName);
-            return _delegates.RG_RequestCard(ref pPortEp, deviceAddress, ref carDinfo);
+            return _delegates.RG_GetStatus(ref pEndPoint, deviceAddress, ref pStatusType, ref pinStates, ref cardInfo, ref cardMemory);
         }
 
         /**

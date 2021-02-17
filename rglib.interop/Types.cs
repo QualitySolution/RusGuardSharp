@@ -300,6 +300,25 @@ namespace RglibInterop {
     }
 
     /// <summary>
+    /// Структура с данными конкретного блока памяти карты Mifare. Используется как для чтения данных из карты,
+    /// так и для записи данных на карту.
+    /// </summary>
+    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi, Pack = 1, Size = 2 + lib_consts.MEMORY_BLOCK_MAX_SIZE)]
+    public struct RG_CARD_MEMORY
+    {
+        /// <summary>
+        /// Номер блока карты или номер профиля, в зависимости от сценария использования.
+        /// </summary>
+        public byte ProfileBlock;
+
+        /// <summary>
+        /// 16 байт данных блока памяти карты Mifare Plus.
+        /// </summary>
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = lib_consts.MEMORY_BLOCK_MAX_SIZE)]
+        public byte[] MemBlock;
+    }
+
+    /// <summary>
     /// Текущий статус устройства
     /// </summary>
     public enum RG_DEVICE_STATUS_TYPE : byte {
