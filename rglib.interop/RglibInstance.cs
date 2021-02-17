@@ -222,10 +222,10 @@ namespace RglibInterop {
          * @param cardfamilyMask маска типов семейств карт
          * @return Код ошибки
          */
-        public error_t RG_SetCardMask(ref RG_ENDPOINT pEndpoint, byte deviceAddress, byte cardfamilyMask) {
+        public error_t RG_SetCardsMask(ref RG_ENDPOINT pEndpoint, byte deviceAddress, byte cardfamilyMask) {
             if (_disposed)
                 throw new ObjectDisposedException(GetType().FullName);
-            return _delegates.RG_SetCardMask(ref pEndpoint, deviceAddress, cardfamilyMask);
+            return _delegates.RG_SetCardsMask(ref pEndpoint, deviceAddress, cardfamilyMask);
         }
 
         /**

@@ -48,7 +48,7 @@ namespace RglibInterop {
         [In, Out] ref RG_CARD_MEMORY cardMemory);
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    internal delegate error_t RG_SetCardMaskDelegate(
+    internal delegate error_t RG_SetCardsMaskDelegate(
         [In] ref RG_ENDPOINT pEndpoint, 
         byte deviceAddress,
         byte cardfamilyMask);
@@ -155,7 +155,7 @@ namespace RglibInterop {
                 [In, Out] ref RG_CARD_MEMORY pCardMemory);
 
             [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
-            internal static extern error_t RG_SetCardMask(
+            internal static extern error_t RG_SetCardsMask(
                 [In] ref RG_ENDPOINT pEndpoint,
                 byte deviceAddress,
                 byte cardfamilyMask);
@@ -241,7 +241,7 @@ namespace RglibInterop {
 
         internal RG_GetStatusDelegate RG_GetStatus = null;
 
-        internal RG_SetCardMaskDelegate RG_SetCardMask = null;
+        internal RG_SetCardsMaskDelegate RG_SetCardsMask = null;
 
         internal RG_ResetProfilesDelegate RG_ResetProfiles = null;
 
@@ -318,9 +318,9 @@ namespace RglibInterop {
                 UnmanagedLibrary.GetDelegateForFunctionPointer<RG_GetStatusDelegate>(
                     UnmanagedLibrary.GetFunctionPointer(libraryHandle, "RG_GetStatus"));
 
-            RG_SetCardMask =
-                UnmanagedLibrary.GetDelegateForFunctionPointer<RG_SetCardMaskDelegate>(
-                    UnmanagedLibrary.GetFunctionPointer(libraryHandle, "RG_SetCardMask"));
+            RG_SetCardsMask =
+                UnmanagedLibrary.GetDelegateForFunctionPointer<RG_SetCardsMaskDelegate>(
+                    UnmanagedLibrary.GetFunctionPointer(libraryHandle, "RG_SetCardsMask"));
 
             RG_ResetProfiles =
                 UnmanagedLibrary.GetDelegateForFunctionPointer<RG_ResetProfilesDelegate>(
@@ -368,7 +368,7 @@ namespace RglibInterop {
             RG_GetInfoExt = LibNativeMethods.RG_GetInfoExt;
             RG_GetStatus = LibNativeMethods.RG_GetStatus;
 
-            RG_SetCardMask = LibNativeMethods.RG_SetCardMask;
+            RG_SetCardsMask = LibNativeMethods.RG_SetCardsMask;
             RG_ResetProfiles = LibNativeMethods.RG_ResetProfiles;
             RG_WriteProfile = LibNativeMethods.RG_WriteProfile;
             RG_WriteCodogramm = LibNativeMethods.RG_WriteCodogramm;

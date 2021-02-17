@@ -213,7 +213,7 @@ namespace rglib.wftest {
                 try {
                     RG_ENDPOINT portEndpoin = _currentConnectoinContext.ReaderPort;
                     byte address = _currentConnectoinContext.ReaderAddress;
-                    uint errorCode = UnmanagedContext.Instance.RG_SetCardMask(ref portEndpoin, address, mask);
+                    uint errorCode = UnmanagedContext.Instance.RG_SetCardsMask(ref portEndpoin, address, mask);
                     if (errorCode != 0) {
                         throw new ApiCallException("Ошибка при установке маски карт", errorCode);
                     }
@@ -244,7 +244,7 @@ namespace rglib.wftest {
                 try {
                     RG_ENDPOINT portEndpoin = _currentConnectoinContext.ReaderPort;
                     byte address = _currentConnectoinContext.ReaderAddress;
-                    uint errorCode = UnmanagedContext.Instance.RG_SetCardMask(ref portEndpoin, address, mask);
+                    uint errorCode = UnmanagedContext.Instance.RG_SetCardsMask(ref portEndpoin, address, mask);
                     if (errorCode != 0) {
                         throw new ApiCallException("Ошибка при установке маски карт", errorCode);
                     }
@@ -273,7 +273,7 @@ namespace rglib.wftest {
                 try {
                     RG_ENDPOINT portEndpoin = _currentConnectoinContext.ReaderPort;
                     byte address = _currentConnectoinContext.ReaderAddress;
-                    uint errorCode = UnmanagedContext.Instance.RG_SetCardMask(ref portEndpoin, address, mask);
+                    uint errorCode = UnmanagedContext.Instance.RG_SetCardsMask(ref portEndpoin, address, mask);
                     if (errorCode != 0) {
                         throw new ApiCallException("Ошибка при установке маски карт", errorCode);
                     }
