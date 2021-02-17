@@ -113,8 +113,8 @@ namespace rglib.wftest {
             if (connectionsBox.SelectedIndex >= 0) {
                 PortInfoBindingWrapper wrapper = connectionsBox.SelectedItem as PortInfoBindingWrapper;
                 if (wrapper != null) {
-                    RG_PORT_ENDPOINT endpoint = new RG_PORT_ENDPOINT();
-                    endpoint.ConnectionString = wrapper.ConnectionString;
+                    RG_ENDPOINT endpoint = new RG_ENDPOINT();
+                    endpoint.Address = wrapper.ConnectionString;
                     byte currentDeviceAddress = 0;
                     while (currentDeviceAddress < 4) {
                         uint errorCode = UnmanagedContext.Instance.RG_InitDevice(ref endpoint, currentDeviceAddress);

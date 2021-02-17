@@ -118,8 +118,8 @@ namespace rglib.wftest {
             if (_currentConnectoinContext == null) {
                 UpdateConnectBlock(false);
                 try {
-                    RG_PORT_ENDPOINT portEndpoint = new RG_PORT_ENDPOINT();
-                    portEndpoint.ConnectionString = _currentConenctionString;
+                    RG_ENDPOINT portEndpoint = new RG_ENDPOINT();
+                    portEndpoint.Address = _currentConenctionString;
 
                     uint errorCcode = UnmanagedContext.Instance.RG_InitDevice(ref portEndpoint, _currentReaderAddress);
                     if (errorCcode != 0) {
@@ -184,7 +184,7 @@ namespace rglib.wftest {
 
         private void WriteCodogramm(CodogrammData data) {
             try {
-                RG_PORT_ENDPOINT portEndpoin = _currentConnectoinContext.ReaderPort;
+                RG_ENDPOINT portEndpoin = _currentConnectoinContext.ReaderPort;
                 byte address = _currentConnectoinContext.ReaderAddress;
                 uint errorCode = UnmanagedContext.Instance.RG_WriteCodogramm(ref portEndpoin, address, data.Number,
                     data.LengthBits, data.CodogrammBody);
@@ -211,7 +211,7 @@ namespace rglib.wftest {
                 }
 
                 try {
-                    RG_PORT_ENDPOINT portEndpoin = _currentConnectoinContext.ReaderPort;
+                    RG_ENDPOINT portEndpoin = _currentConnectoinContext.ReaderPort;
                     byte address = _currentConnectoinContext.ReaderAddress;
                     uint errorCode = UnmanagedContext.Instance.RG_SetCardMask(ref portEndpoin, address, mask);
                     if (errorCode != 0) {
@@ -242,7 +242,7 @@ namespace rglib.wftest {
                 }
 
                 try {
-                    RG_PORT_ENDPOINT portEndpoin = _currentConnectoinContext.ReaderPort;
+                    RG_ENDPOINT portEndpoin = _currentConnectoinContext.ReaderPort;
                     byte address = _currentConnectoinContext.ReaderAddress;
                     uint errorCode = UnmanagedContext.Instance.RG_SetCardMask(ref portEndpoin, address, mask);
                     if (errorCode != 0) {
@@ -271,7 +271,7 @@ namespace rglib.wftest {
                 }
 
                 try {
-                    RG_PORT_ENDPOINT portEndpoin = _currentConnectoinContext.ReaderPort;
+                    RG_ENDPOINT portEndpoin = _currentConnectoinContext.ReaderPort;
                     byte address = _currentConnectoinContext.ReaderAddress;
                     uint errorCode = UnmanagedContext.Instance.RG_SetCardMask(ref portEndpoin, address, mask);
                     if (errorCode != 0) {
@@ -295,7 +295,7 @@ namespace rglib.wftest {
         private void RequestStatusClick(object sender, EventArgs e) {
             if (_currentConnectoinContext != null) {
                 try {
-                    RG_PORT_ENDPOINT portEndpoin = _currentConnectoinContext.ReaderPort;
+                    RG_ENDPOINT portEndpoin = _currentConnectoinContext.ReaderPort;
                     byte address = _currentConnectoinContext.ReaderAddress;
 
 
@@ -417,7 +417,7 @@ namespace rglib.wftest {
                 while (!_pollStopEvent.WaitOne(200)) {
                     if (_currentConnectoinContext != null) {
 
-                        RG_PORT_ENDPOINT portEndpoin = _currentConnectoinContext.ReaderPort;
+                        RG_ENDPOINT portEndpoin = _currentConnectoinContext.ReaderPort;
                         byte address = _currentConnectoinContext.ReaderAddress;
 
                         RG_PIN_SATETS_16 pinStates = new RG_PIN_SATETS_16();
@@ -547,7 +547,7 @@ namespace rglib.wftest {
 
         private void StartIndicationClick(object sender, EventArgs e) {
             try {
-                RG_PORT_ENDPOINT portEndpoin = _currentConnectoinContext.ReaderPort;
+                RG_ENDPOINT portEndpoin = _currentConnectoinContext.ReaderPort;
                 byte address = _currentConnectoinContext.ReaderAddress;
 
                 uint errorCode = UnmanagedContext.Instance.RG_StartInidicationDirect(
@@ -574,7 +574,7 @@ namespace rglib.wftest {
 
         private void controlOutSet_Click(object sender, EventArgs e) {
             try {
-                RG_PORT_ENDPOINT portEndpoin = _currentConnectoinContext.ReaderPort;
+                RG_ENDPOINT portEndpoin = _currentConnectoinContext.ReaderPort;
                 byte address = _currentConnectoinContext.ReaderAddress;
 
                 uint errorCode = UnmanagedContext.Instance.RG_SetControlOutState(
@@ -617,7 +617,7 @@ namespace rglib.wftest {
             if ((_currentConnectoinContext != null)) {
                 try {
                     if (profilesListBox.CheckedItems.Count > 0) {
-                        RG_PORT_ENDPOINT portEndpoin = _currentConnectoinContext.ReaderPort;
+                        RG_ENDPOINT portEndpoin = _currentConnectoinContext.ReaderPort;
                         byte address = _currentConnectoinContext.ReaderAddress;
 
                         uint errorCode =
@@ -694,7 +694,7 @@ namespace rglib.wftest {
 
                 try {
 
-                    RG_PORT_ENDPOINT portEndpoin = _currentConnectoinContext.ReaderPort;
+                    RG_ENDPOINT portEndpoin = _currentConnectoinContext.ReaderPort;
                     byte address = _currentConnectoinContext.ReaderAddress;
 
                     uint errorCode =
@@ -751,7 +751,7 @@ namespace rglib.wftest {
 
                 try {
 
-                    RG_PORT_ENDPOINT portEndpoin = _currentConnectoinContext.ReaderPort;
+                    RG_ENDPOINT portEndpoin = _currentConnectoinContext.ReaderPort;
                     byte address = _currentConnectoinContext.ReaderAddress;
 
                     uint errorCode =

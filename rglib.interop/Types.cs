@@ -146,7 +146,7 @@ namespace RglibInterop {
     /// <summary>
     /// Тип подключения
     /// </summary>
-    public enum RG_PORT_TYPE : byte {
+    public enum RG_ENDPOINT_TYPE : byte {
         /// <summary>
         /// Неизвестный тип подключения (не удалось разобрать строку подключения)
         /// </summary>
@@ -188,11 +188,16 @@ namespace RglibInterop {
     /// Структура определяющая параметры подключения
     /// </summary>
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi, Pack = 1)]
-    public struct RG_PORT_ENDPOINT {
+    public struct RG_ENDPOINT {
+        /// <summary>
+        /// Тип подключения
+        /// </summary>
+        [MarshalAs(UnmanagedType.U1)] public RG_ENDPOINT_TYPE Type;
+
         /// <summary>
         /// Строка подключения (31 символов ASCII + null символ)
         /// </summary>
-        [MarshalAs(UnmanagedType.LPStr)] public string ConnectionString;
+        [MarshalAs(UnmanagedType.LPStr)] public string Address;
     }
 
     /// <summary>
@@ -203,7 +208,7 @@ namespace RglibInterop {
         /// <summary>
         /// Тип подключения
         /// </summary>
-        [MarshalAs(UnmanagedType.U1)] public RG_PORT_TYPE PortType;
+        [MarshalAs(UnmanagedType.U1)] public RG_ENDPOINT_TYPE PortType;
 
         /// <summary>
         /// Строка подключения

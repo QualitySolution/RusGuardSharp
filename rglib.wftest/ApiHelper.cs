@@ -27,17 +27,17 @@ namespace rglib.wftest {
 
 
     public class ReaderConnectionContext {
-        private readonly RG_PORT_ENDPOINT _readerPort;
+        private readonly RG_ENDPOINT _readerPort;
         private RG_DEVICE_INFO_SHORT _deviceInfo;
         private readonly byte _readerAddress;
 
-        public ReaderConnectionContext(RG_PORT_ENDPOINT readerPort,  byte readerAddress, RG_DEVICE_INFO_SHORT deviceInfo) {
+        public ReaderConnectionContext(RG_ENDPOINT readerPort,  byte readerAddress, RG_DEVICE_INFO_SHORT deviceInfo) {
             _readerPort = readerPort;
             _readerAddress = readerAddress;
             _deviceInfo = deviceInfo;
         }
 
-        public RG_PORT_ENDPOINT ReaderPort {
+        public RG_ENDPOINT ReaderPort {
             get { return _readerPort; }
         }
 

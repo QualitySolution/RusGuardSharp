@@ -156,14 +156,14 @@ namespace RglibInterop {
 
         /**
          * @brief Производит инициализацию устройства.  Нет необходимости при использовании флага инициализации RIF_TRANSPARENT_INIT
-         * @param pPortEp Строка подключения
+         * @param pEndpoint Строка подключения
          * @param deviceAddress Адрес устройства
          * @return Код ошибки
          */
-        public error_t RG_InitDevice(ref RG_PORT_ENDPOINT pPortEp, byte deviceAddress) {
+        public error_t RG_InitDevice(ref RG_ENDPOINT pEndpoint, byte deviceAddress) {
             if (_disposed)
                 throw new ObjectDisposedException(GetType().FullName);
-            return _delegates.RG_InitDevice(ref pPortEp, deviceAddress);
+            return _delegates.RG_InitDevice(ref pEndpoint, deviceAddress);
         }
 
         /**
@@ -173,7 +173,7 @@ namespace RglibInterop {
          * @param pDeviceInfo не null указатель на структуру с информацией об устройстве
          * @return Код ошибки
          */
-        public error_t RG_GetInfo(ref RG_PORT_ENDPOINT pEndPoint, byte deviceAddress, ref RG_DEVICE_INFO_SHORT pDeviceInfo) {
+        public error_t RG_GetInfo(ref RG_ENDPOINT pEndPoint, byte deviceAddress, ref RG_DEVICE_INFO_SHORT pDeviceInfo) {
             if (_disposed)
                 throw new ObjectDisposedException(GetType().FullName);
             return _delegates.RG_GetInfo(ref pEndPoint, deviceAddress, ref pDeviceInfo);
@@ -186,7 +186,7 @@ namespace RglibInterop {
         * @param pDeviceInfo не null указатель на структуру с информацией об устройстве
         * @return Код ошибки
         */
-        public error_t RG_GetInfoExt(ref RG_PORT_ENDPOINT pEndPoint, byte deviceAddress, ref RG_DEVICE_INFO_EXT pDeviceInfo)
+        public error_t RG_GetInfoExt(ref RG_ENDPOINT pEndPoint, byte deviceAddress, ref RG_DEVICE_INFO_EXT pDeviceInfo)
         {
             if (_disposed)
                 throw new ObjectDisposedException(GetType().FullName);
@@ -195,7 +195,7 @@ namespace RglibInterop {
 
         /**
         * @brief Запрашивает текущий статус устройства
-        * @param pPortEp указатель на параметры подключения
+        * @param pEndpoint указатель на параметры подключения
         * @param deviceAddress адрес сутройства
         * @param pStatusType не null указатель на тип статуса устройства
         * @param pCardInfo не null указатель на структуру данных о карте
@@ -203,7 +203,7 @@ namespace RglibInterop {
         * @return Код ошибки
            */
         public error_t RG_GetStatus(
-            ref RG_PORT_ENDPOINT pEndPoint,
+            ref RG_ENDPOINT pEndPoint,
             byte deviceAddress,
             ref RG_DEVICE_STATUS_TYPE pStatusType,
             ref RG_PIN_SATETS_16 pinStates,
@@ -217,39 +217,39 @@ namespace RglibInterop {
 
         /**
          * @brief Устанавливает устройству маску считываемых типов карт
-         * @param pPortEp указатель на структура с параметрами подключения
+         * @param pEndpoint указатель на структура с параметрами подключения
          * @param deviceAddress адрес устройства
          * @param cardfamilyMask маска типов семейств карт
          * @return Код ошибки
          */
-        public error_t RG_SetCardMask(ref RG_PORT_ENDPOINT pPortEp, byte deviceAddress, byte cardfamilyMask) {
+        public error_t RG_SetCardMask(ref RG_ENDPOINT pEndpoint, byte deviceAddress, byte cardfamilyMask) {
             if (_disposed)
                 throw new ObjectDisposedException(GetType().FullName);
-            return _delegates.RG_SetCardMask(ref pPortEp, deviceAddress, cardfamilyMask);
+            return _delegates.RG_SetCardMask(ref pEndpoint, deviceAddress, cardfamilyMask);
         }
 
         /**
          * @brief Очищает профили в памяти устройства
-         * @param pPortEp указатель на структуру с параметрами подключения
+         * @param pEndpoint указатель на структуру с параметрами подключения
          * @param deviceAddress адрес устройства
          * @return Код ошибки
          */
-        public error_t RG_ResetProfiles(ref RG_PORT_ENDPOINT pPortEp, byte deviceAddress) {
+        public error_t RG_ResetProfiles(ref RG_ENDPOINT pEndpoint, byte deviceAddress) {
             if (_disposed)
                 throw new ObjectDisposedException(GetType().FullName);
-            return _delegates.RG_ResetProfiles(ref pPortEp, deviceAddress);
+            return _delegates.RG_ResetProfiles(ref pEndpoint, deviceAddress);
         }
 
         /**
          * @brief Записывает профиль в память устройства
-         * @param pPortEp указатель на структуру с параметрами подключения
+         * @param pEndpoint указатель на структуру с параметрами подключения
          * @param deviceAddress адрес устройства
          * @param profileNumber номер под которым будет записан профиль в память, в порядке убывания приоритета
          * @param pProfileinfo указатель на структуру с данными профиля
          * @return Код ошибки
          */
         public error_t RG_WriteProfile(
-            ref RG_PORT_ENDPOINT pPortEp,
+            ref RG_ENDPOINT pEndpoint,
             byte deviceAddress,
             byte profileNumber,
             byte blockNum,
@@ -257,42 +257,42 @@ namespace RglibInterop {
         {
             if (_disposed)
                 throw new ObjectDisposedException(GetType().FullName);
-            return _delegates.RG_WriteProfile(ref pPortEp, deviceAddress, profileNumber, blockNum, ref profileData);
+            return _delegates.RG_WriteProfile(ref pEndpoint, deviceAddress, profileNumber, blockNum, ref profileData);
         }
 
         /**
          * @brief Записывает кодограмму (схему андикации) в память устройства
-         * @param pPortEp указатель на структуру с параметрами подключения
+         * @param pEndpoint указатель на структуру с параметрами подключения
          * @param deviceAddress адрес устройства
          * @param codogrammLengthBits длина кодограммы в битах ()макс 32)
          * @param codogrammBody тело кодограммы (1HS бит = 100мс)
          * @return Код ошибки
          */
-        public error_t RG_WriteCodogramm(ref RG_PORT_ENDPOINT pPortEpp, byte deviceAddress, byte codogrammNumber,
+        public error_t RG_WriteCodogramm(ref RG_ENDPOINT pEndpointp, byte deviceAddress, byte codogrammNumber,
             byte codogrammLengthBits, uint codogrammBody) {
             if (_disposed)
                 throw new ObjectDisposedException(GetType().FullName);
-            return _delegates.RG_WriteCodogramm(ref pPortEpp, deviceAddress, codogrammNumber, codogrammLengthBits, codogrammBody);
+            return _delegates.RG_WriteCodogramm(ref pEndpointp, deviceAddress, codogrammNumber, codogrammLengthBits, codogrammBody);
         }
 
         /**
          * @brief Запускает индикацию согласно соттветствующей схеме
-         * @param pPortEp указатель на структуру с параметрами подключения
+         * @param pEndpoint указатель на структуру с параметрами подключения
          * @param deviceAddress адрес устройства
          * @param priorityLevel уровень приоритета индикации
          * @param pIndicStart указатель на структуру с информацией о схеме индикации для каждого канала
          * @return 
          */
-        public error_t RG_StartInidication(ref RG_PORT_ENDPOINT pPortEp, byte deviceAddress, byte priorityLevel,
+        public error_t RG_StartInidication(ref RG_ENDPOINT pEndpoint, byte deviceAddress, byte priorityLevel,
             ref RG_INIDICATION_START_INFO pIndicStart) {
             if (_disposed)
                 throw new ObjectDisposedException(GetType().FullName);
-            return _delegates.RG_StartInidication(ref pPortEp, deviceAddress, priorityLevel, ref pIndicStart);
+            return _delegates.RG_StartInidication(ref pEndpoint, deviceAddress, priorityLevel, ref pIndicStart);
         }
 
         /**
         * @brief Запускает индикацию согласно соттветствующей схеме
-        * @param pPortEp указатель на структуру с параметрами подключения
+        * @param pEndpoint указатель на структуру с параметрами подключения
         * @param deviceAddress адрес устройства
         * @param priorityLevel уровень приоритета индикации
         * @param soundCodogrammNumber номер кодограммы звукового канала индикации
@@ -301,35 +301,35 @@ namespace RglibInterop {
         * @param blueCodogrammNumber номер кодограммы канала синего светодиода
         * @return Код ошибки
         */
-        public error_t RG_StartInidicationDirect(ref RG_PORT_ENDPOINT pPortEp, byte deviceAddress,
+        public error_t RG_StartInidicationDirect(ref RG_ENDPOINT pEndpoint, byte deviceAddress,
             byte priorityLevel, byte soundCodogrammNumber, byte regCodogrammNumber, byte greenCodogrammNumber,
             byte blueCodogrammNumber) {
             if (_disposed)
                 throw new ObjectDisposedException(GetType().FullName);
-            return _delegates.RG_StartInidicationDirect(ref pPortEp, deviceAddress, priorityLevel, soundCodogrammNumber,
+            return _delegates.RG_StartInidicationDirect(ref pEndpoint, deviceAddress, priorityLevel, soundCodogrammNumber,
                 regCodogrammNumber, greenCodogrammNumber, blueCodogrammNumber);
         }
 
 
         /**
          * @brief 
-         * @param pPortEp указатель на структуру с параметрами подключения
+         * @param pEndpoint указатель на структуру с параметрами подключения
          * @param deviceAddress адрес устройства
          * @param controlOutNumber номер управляющего выхода
          * @param controlOutState устанавливаемое состояние (0/1)
          * @param timeoutSec время удержания состояния в сек. (0 - постоянно)
          * @return Код ошибки
          */
-        public error_t RG_SetControlOutState(ref RG_PORT_ENDPOINT pPortEp, byte deviceAddress,
+        public error_t RG_SetControlOutState(ref RG_ENDPOINT pEndpoint, byte deviceAddress,
             byte controlOutNumber, byte controlOutState, byte timeoutSec) {
             if (_disposed)
                 throw new ObjectDisposedException(GetType().FullName);
-            return _delegates.RG_SetControlOutState(ref pPortEp, deviceAddress, controlOutNumber, controlOutState,
+            return _delegates.RG_SetControlOutState(ref pEndpoint, deviceAddress, controlOutNumber, controlOutState,
                 timeoutSec);
         }
 
         public error_t RG_ReadBlockDirect(
-            ref RG_PORT_ENDPOINT pPortEp,
+            ref RG_ENDPOINT pEndpoint,
             byte deviceAddress,
             byte blockNum,
             ref RG_PROFILE_DATA profileData,
@@ -338,7 +338,7 @@ namespace RglibInterop {
             ref RG_PIN_SATETS_16 pinStates) {
             if (_disposed)
                 throw new ObjectDisposedException(GetType().FullName);
-            return _delegates.RG_ReadBlockDirect(ref pPortEp, deviceAddress, blockNum, ref profileData, blockData, ref blockDataSize, ref pinStates);
+            return _delegates.RG_ReadBlockDirect(ref pEndpoint, deviceAddress, blockNum, ref profileData, blockData, ref blockDataSize, ref pinStates);
         }
 
         #endregion

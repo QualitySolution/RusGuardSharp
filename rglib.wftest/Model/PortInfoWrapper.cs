@@ -9,7 +9,7 @@ namespace rglib.wftest.Model {
             get { return WrappedObject.ConnectionString; }
         }
 
-        public RG_PORT_TYPE PortType {
+        public RG_ENDPOINT_TYPE PortType {
             get { return WrappedObject.PortType; }
         }
 

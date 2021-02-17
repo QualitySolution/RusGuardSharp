@@ -30,17 +30,17 @@ namespace RglibInterop {
     internal delegate error_t RG_GetFoundDeviceInfoDelegate(IntPtr pDevicesListHandle, uint deviceIndex, [In, Out] ref RG_PORT_INFO pEndpointInfo, [In, Out] ref RG_DEVICE_INFO_EXT pDeviceInfoExt);
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    internal delegate error_t RG_InitDeviceDelegate([In] ref RG_PORT_ENDPOINT pPortEp, byte deviceAddress);
+    internal delegate error_t RG_InitDeviceDelegate([In] ref RG_ENDPOINT pEndpoint, byte deviceAddress);
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    internal delegate error_t RG_GetInfoDelegate(ref RG_PORT_ENDPOINT pEndPoint, byte deviceAddress, [In, Out] ref RG_DEVICE_INFO_SHORT pDeviceInfo);
+    internal delegate error_t RG_GetInfoDelegate(ref RG_ENDPOINT pEndPoint, byte deviceAddress, [In, Out] ref RG_DEVICE_INFO_SHORT pDeviceInfo);
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    internal delegate error_t RG_GetInfoExtDelegate(ref RG_PORT_ENDPOINT pEndPoint, byte deviceAddress, [In, Out] ref RG_DEVICE_INFO_EXT pDeviceInfo);
+    internal delegate error_t RG_GetInfoExtDelegate(ref RG_ENDPOINT pEndPoint, byte deviceAddress, [In, Out] ref RG_DEVICE_INFO_EXT pDeviceInfo);
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     internal delegate error_t RG_GetStatusDelegate(
-        [In] ref RG_PORT_ENDPOINT pPortEp,
+        [In] ref RG_ENDPOINT pEndpoint,
         byte deviceAddress,
         [In, Out, MarshalAs(UnmanagedType.U1)] ref RG_DEVICE_STATUS_TYPE pStatusType,
         [In, Out] ref RG_PIN_SATETS_16 pinStates,
@@ -49,18 +49,18 @@ namespace RglibInterop {
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     internal delegate error_t RG_SetCardMaskDelegate(
-        [In] ref RG_PORT_ENDPOINT pPortEp, 
+        [In] ref RG_ENDPOINT pEndpoint, 
         byte deviceAddress,
         byte cardfamilyMask);
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     internal delegate error_t RG_ResetProfilesDelegate(
-        [In] ref RG_PORT_ENDPOINT pPortEp,
+        [In] ref RG_ENDPOINT pEndpoint,
         byte deviceAddress);
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     internal delegate error_t RG_WriteProfileDelegate(
-        [In] ref RG_PORT_ENDPOINT pPortEp,
+        [In] ref RG_ENDPOINT pEndpoint,
         byte deviceAddress,
         byte profileNumber, 
         byte blockNum,
@@ -68,7 +68,7 @@ namespace RglibInterop {
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     internal delegate error_t RG_WriteCodogrammDelegate(
-        [In] ref RG_PORT_ENDPOINT pPortEpp, 
+        [In] ref RG_ENDPOINT pEndpointp, 
         byte deviceAddress, 
         byte codogrammNumber,
         byte codogrammLengthBits, 
@@ -76,14 +76,14 @@ namespace RglibInterop {
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     internal delegate error_t RG_StartInidicationDelegate(
-        [In] ref RG_PORT_ENDPOINT pPortEp,
+        [In] ref RG_ENDPOINT pEndpoint,
         byte deviceAddress,
         byte priorityLevel, 
         [In] ref RG_INIDICATION_START_INFO pIndicStart);
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     internal delegate error_t RG_StartInidicationDirectDelegate(
-        [In] ref RG_PORT_ENDPOINT pPortEp, 
+        [In] ref RG_ENDPOINT pEndpoint, 
         byte deviceAddress,
         byte priorityLevel, 
         byte soundCodogrammNumber, 
@@ -93,7 +93,7 @@ namespace RglibInterop {
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     internal delegate error_t RG_SetControlOutStateDelegate(
-        [In] ref RG_PORT_ENDPOINT pPortEp, 
+        [In] ref RG_ENDPOINT pEndpoint, 
         byte deviceAddress,
         byte controlOutNumber, 
         byte controlOutState, 
@@ -101,7 +101,7 @@ namespace RglibInterop {
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     internal delegate error_t RG_ReadBlockDirectDelegate(
-        [In] ref RG_PORT_ENDPOINT pPortEp, 
+        [In] ref RG_ENDPOINT pEndpoint, 
         byte deviceAddress,
         byte blockNum,
         [In] ref RG_PROFILE_DATA profileData,
@@ -137,17 +137,17 @@ namespace RglibInterop {
             internal static extern error_t RG_GetFoundDeviceInfo(IntPtr pDeviceEnumerator, uint deviceIndex, [In, Out] ref RG_PORT_INFO pEndpointInfo, [In, Out] ref RG_DEVICE_INFO_EXT pDeviceInfoExt);
 
             [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
-            internal static extern error_t RG_InitDevice([In] ref RG_PORT_ENDPOINT pPortEp, byte deviceAddress);
+            internal static extern error_t RG_InitDevice([In] ref RG_ENDPOINT pEndpoint, byte deviceAddress);
 
             [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
-            internal static extern error_t RG_GetInfo(ref RG_PORT_ENDPOINT pEndPoint, byte deviceAddress, [In, Out] ref RG_DEVICE_INFO_SHORT pDeviceInfo);
+            internal static extern error_t RG_GetInfo(ref RG_ENDPOINT pEndPoint, byte deviceAddress, [In, Out] ref RG_DEVICE_INFO_SHORT pDeviceInfo);
 
             [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
-            internal static extern error_t RG_GetInfoExt(ref RG_PORT_ENDPOINT pEndPoint, byte deviceAddress, [In, Out] ref RG_DEVICE_INFO_EXT pDeviceInfo);
+            internal static extern error_t RG_GetInfoExt(ref RG_ENDPOINT pEndPoint, byte deviceAddress, [In, Out] ref RG_DEVICE_INFO_EXT pDeviceInfo);
 
             [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
             internal static extern error_t RG_GetStatus(
-                [In] ref RG_PORT_ENDPOINT pPortEp,
+                [In] ref RG_ENDPOINT pEndpoint,
                 byte deviceAddress,
                 [In, Out, MarshalAs(UnmanagedType.U1)] ref RG_DEVICE_STATUS_TYPE pStatusType,
                 [In, Out] ref RG_PIN_SATETS_16 pinStates,
@@ -156,18 +156,18 @@ namespace RglibInterop {
 
             [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
             internal static extern error_t RG_SetCardMask(
-                [In] ref RG_PORT_ENDPOINT pPortEp,
+                [In] ref RG_ENDPOINT pEndpoint,
                 byte deviceAddress,
                 byte cardfamilyMask);
 
             [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
             internal static extern error_t RG_ResetProfiles(
-                [In] ref RG_PORT_ENDPOINT pPortEp,
+                [In] ref RG_ENDPOINT pEndpoint,
                 byte deviceAddress);
 
             [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
             internal static extern error_t RG_WriteProfile(
-                [In] ref RG_PORT_ENDPOINT pPortEp,
+                [In] ref RG_ENDPOINT pEndpoint,
                 byte deviceAddress,
                 byte profileNumber,
                 byte blockNum,
@@ -175,7 +175,7 @@ namespace RglibInterop {
 
             [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
             internal static extern error_t RG_WriteCodogramm(
-                [In] ref RG_PORT_ENDPOINT pPortEpp,
+                [In] ref RG_ENDPOINT pEndpointp,
                 byte deviceAddress,
                 byte codogrammNumber,
                 byte codogrammLengthBits,
@@ -183,14 +183,14 @@ namespace RglibInterop {
 
             [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
             internal static extern error_t RG_StartInidication(
-                [In] ref RG_PORT_ENDPOINT pPortEp,
+                [In] ref RG_ENDPOINT pEndpoint,
                 byte deviceAddress,
                 byte priorityLevel,
                 [In] ref RG_INIDICATION_START_INFO pIndicStart);
 
             [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
             internal static extern error_t RG_StartInidicationDirect(
-                [In] ref RG_PORT_ENDPOINT pPortEp,
+                [In] ref RG_ENDPOINT pEndpoint,
                 byte deviceAddress,
                 byte priorityLevel,
                 byte soundCodogrammNumber,
@@ -200,7 +200,7 @@ namespace RglibInterop {
 
             [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
             internal static extern error_t RG_SetControlOutState(
-                [In] ref RG_PORT_ENDPOINT pPortEp,
+                [In] ref RG_ENDPOINT pEndpoint,
                 byte deviceAddress,
                 byte controlOutNumber,
                 byte controlOutState,
@@ -208,7 +208,7 @@ namespace RglibInterop {
 
             [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
             internal static extern error_t RG_ReadBlockDirect(
-                [In] ref RG_PORT_ENDPOINT pPortEp,
+                [In] ref RG_ENDPOINT pEndpoint,
                 byte deviceAddress,
                 byte blockNum,
                 [In] ref RG_PROFILE_DATA profileData,
