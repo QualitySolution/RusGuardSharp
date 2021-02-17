@@ -276,38 +276,23 @@ namespace RglibInterop {
         }
 
         /**
-         * @brief Запускает индикацию согласно соттветствующей схеме
-         * @param pEndpoint указатель на структуру с параметрами подключения
-         * @param deviceAddress адрес устройства
-         * @param priorityLevel уровень приоритета индикации
-         * @param pIndicStart указатель на структуру с информацией о схеме индикации для каждого канала
-         * @return 
-         */
-        public error_t RG_StartInidication(ref RG_ENDPOINT pEndpoint, byte deviceAddress, byte priorityLevel,
-            ref RG_INIDICATION_START_INFO pIndicStart) {
-            if (_disposed)
-                throw new ObjectDisposedException(GetType().FullName);
-            return _delegates.RG_StartInidication(ref pEndpoint, deviceAddress, priorityLevel, ref pIndicStart);
-        }
-
-        /**
         * @brief Запускает индикацию согласно соттветствующей схеме
         * @param pEndpoint указатель на структуру с параметрами подключения
         * @param deviceAddress адрес устройства
         * @param priorityLevel уровень приоритета индикации
         * @param soundCodogrammNumber номер кодограммы звукового канала индикации
-        * @param regCodogrammNumber номер кодограммы канала красного светодиода
+        * @param redCodogrammNumber номер кодограммы канала красного светодиода
         * @param greenCodogrammNumber номер кодограммы канала зеленого светодиода
         * @param blueCodogrammNumber номер кодограммы канала синего светодиода
         * @return Код ошибки
         */
-        public error_t RG_StartInidicationDirect(ref RG_ENDPOINT pEndpoint, byte deviceAddress,
-            byte priorityLevel, byte soundCodogrammNumber, byte regCodogrammNumber, byte greenCodogrammNumber,
+        public error_t RG_StartCodogramm(ref RG_ENDPOINT pEndpoint, byte deviceAddress,
+            byte priorityLevel, byte soundCodogrammNumber, byte redCodogrammNumber, byte greenCodogrammNumber,
             byte blueCodogrammNumber) {
             if (_disposed)
                 throw new ObjectDisposedException(GetType().FullName);
-            return _delegates.RG_StartInidicationDirect(ref pEndpoint, deviceAddress, priorityLevel, soundCodogrammNumber,
-                regCodogrammNumber, greenCodogrammNumber, blueCodogrammNumber);
+            return _delegates.RG_StartCodogramm(ref pEndpoint, deviceAddress, priorityLevel, soundCodogrammNumber,
+                redCodogrammNumber, greenCodogrammNumber, blueCodogrammNumber);
         }
 
 

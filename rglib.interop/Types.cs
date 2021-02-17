@@ -376,32 +376,6 @@ namespace RglibInterop {
         public byte[] MfAesKey;
     }
 
-    /// <summary>
-    /// Структура с информацией о схеме индикации на каждом канале
-    /// </summary>
-    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi, Pack = 1, Size = 4)]
-    public struct RG_INIDICATION_START_INFO {
-        /// <summary>
-        /// номер кодограммы звукового канала индикации
-        /// </summary>
-        public byte SoundCodogrammNumber;
-
-        /// <summary>
-        /// номер кодограммы канала красного светодиода
-        /// </summary>
-        public byte RegCodogrammNumber;
-
-        /// <summary>
-        /// номер кодограммы канала зеленого светодиода
-        /// </summary>
-        public byte GreenCodogrammNumber;
-
-        /// <summary>
-        /// номер кодограммы канала синего светодиода
-        /// </summary>
-        public byte BlueCodogrammNumber;
-    }
-
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi, Pack = 1, Size = 2)]
     public struct RG_PIN_SATETS_16 {
 

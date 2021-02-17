@@ -75,14 +75,7 @@ namespace RglibInterop {
         uint codogrammBody);
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    internal delegate error_t RG_StartInidicationDelegate(
-        [In] ref RG_ENDPOINT pEndpoint,
-        byte deviceAddress,
-        byte priorityLevel, 
-        [In] ref RG_INIDICATION_START_INFO pIndicStart);
-
-    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    internal delegate error_t RG_StartInidicationDirectDelegate(
+    internal delegate error_t RG_StartCodogrammDelegate(
         [In] ref RG_ENDPOINT pEndpoint, 
         byte deviceAddress,
         byte priorityLevel, 
@@ -182,14 +175,7 @@ namespace RglibInterop {
                 uint codogrammBody);
 
             [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
-            internal static extern error_t RG_StartInidication(
-                [In] ref RG_ENDPOINT pEndpoint,
-                byte deviceAddress,
-                byte priorityLevel,
-                [In] ref RG_INIDICATION_START_INFO pIndicStart);
-
-            [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
-            internal static extern error_t RG_StartInidicationDirect(
+            internal static extern error_t RG_StartCodogramm(
                 [In] ref RG_ENDPOINT pEndpoint,
                 byte deviceAddress,
                 byte priorityLevel,
@@ -249,9 +235,7 @@ namespace RglibInterop {
 
         internal RG_WriteCodogrammDelegate RG_WriteCodogramm = null;
 
-        internal RG_StartInidicationDelegate RG_StartInidication = null;
-
-        internal RG_StartInidicationDirectDelegate RG_StartInidicationDirect = null;
+        internal RG_StartCodogrammDelegate RG_StartCodogramm = null;
 
         internal RG_SetControlOutStateDelegate RG_SetControlOutState = null;
 
@@ -334,13 +318,9 @@ namespace RglibInterop {
                 UnmanagedLibrary.GetDelegateForFunctionPointer<RG_WriteCodogrammDelegate>(
                     UnmanagedLibrary.GetFunctionPointer(libraryHandle, "RG_WriteCodogramm"));
 
-            RG_StartInidication =
-                UnmanagedLibrary.GetDelegateForFunctionPointer<RG_StartInidicationDelegate>(
-                    UnmanagedLibrary.GetFunctionPointer(libraryHandle, "RG_StartInidication"));
-
-            RG_StartInidicationDirect =
-                UnmanagedLibrary.GetDelegateForFunctionPointer<RG_StartInidicationDirectDelegate>(
-                    UnmanagedLibrary.GetFunctionPointer(libraryHandle, "RG_StartInidicationDirect"));
+            RG_StartCodogramm =
+                UnmanagedLibrary.GetDelegateForFunctionPointer<RG_StartCodogrammDelegate>(
+                    UnmanagedLibrary.GetFunctionPointer(libraryHandle, "RG_StartCodogramm"));
 
             RG_SetControlOutState =
                 UnmanagedLibrary.GetDelegateForFunctionPointer<RG_SetControlOutStateDelegate>(
@@ -372,8 +352,7 @@ namespace RglibInterop {
             RG_ClearProfiles = LibNativeMethods.RG_ClearProfiles;
             RG_WriteProfile = LibNativeMethods.RG_WriteProfile;
             RG_WriteCodogramm = LibNativeMethods.RG_WriteCodogramm;
-            RG_StartInidication = LibNativeMethods.RG_StartInidication;
-            RG_StartInidicationDirect = LibNativeMethods.RG_StartInidicationDirect;
+            RG_StartCodogramm = LibNativeMethods.RG_StartCodogramm;
             RG_SetControlOutState = LibNativeMethods.RG_SetControlOutState;
 
             RG_ReadBlockDirect = LibNativeMethods.RG_ReadBlockDirect;

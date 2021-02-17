@@ -550,7 +550,7 @@ namespace rglib.wftest {
                 RG_ENDPOINT portEndpoin = _currentConnectoinContext.ReaderPort;
                 byte address = _currentConnectoinContext.ReaderAddress;
 
-                uint errorCode = UnmanagedContext.Instance.RG_StartInidicationDirect(
+                uint errorCode = UnmanagedContext.Instance.RG_StartCodogramm(
                     ref portEndpoin,
                     address,
                     Convert.ToByte(priotiryBox.SelectedIndex),
