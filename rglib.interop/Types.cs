@@ -222,7 +222,8 @@ namespace RglibInterop {
     /// Структура информации об устройстве
     /// </summary>
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi, Pack = 1, Size = 4)]
-    public struct RG_DEVICE_INFO {
+    public struct RG_DEVICE_INFO_SHORT
+    {
         /// <summary>
         /// Адрес устройства
         /// </summary>
@@ -242,6 +243,43 @@ namespace RglibInterop {
         /// Количество кодограмм в памяти устройства
         /// </summary>
         public byte CodogrammsCount;
+    }
+
+    /// <summary>
+    /// Структура информации об устройстве
+    /// </summary>
+    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi, Pack = 1, Size = 13)]
+    public struct RG_DEVICE_INFO_EXT
+    {
+        /// <summary>
+        /// Адрес устройства
+        /// </summary>
+        public byte DeviceAddress;
+
+        /// <summary>
+        /// Серийный номер считывателя.
+        /// </summary>
+        public uint Serial;
+
+        /// <summary>
+        /// Флаг для проверки на запрет прошивки.
+        /// </summary>
+        public byte FirmwareUpdateLock;
+
+        /// <summary>
+        /// Тип устройства
+        /// </summary>
+        [MarshalAs(UnmanagedType.U1)] public RG_DEVICE_TYPE DeviceType;
+
+        /// <summary>
+        /// Версия прошивки устройства
+        /// </summary>
+        public ushort FirmwareVersion;
+
+        /// <summary>
+        /// Флаги функциональных возможностей устройства, согласно значениям перечисления E_RG_CAPABILITIES.
+        /// </summary>
+        public uint Capabilities;
     }
 
     /// <summary>

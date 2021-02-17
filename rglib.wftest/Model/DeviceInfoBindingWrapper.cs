@@ -1,8 +1,8 @@
 ﻿using RglibInterop;
 
 namespace rglib.wftest.Model {
-    public class DeviceInfoBindingWrapper : BindingWrapper<RG_DEVICE_INFO> {
-        public DeviceInfoBindingWrapper(RG_DEVICE_INFO wrappedObject) : base(wrappedObject) {
+    public class DeviceInfoBindingWrapper : BindingWrapper<RG_DEVICE_INFO_SHORT> {
+        public DeviceInfoBindingWrapper(RG_DEVICE_INFO_SHORT wrappedObject) : base(wrappedObject) {
         }
 
         public RG_DEVICE_TYPE DeviceType {

@@ -126,9 +126,9 @@ namespace rglib.wftest {
                         throw new ApiCallException("Ошибка при подключении к устройству", errorCcode);
                     }
 
-                    RG_DEVICE_INFO deviceInfo = new RG_DEVICE_INFO();
+                    RG_DEVICE_INFO_SHORT deviceInfo = new RG_DEVICE_INFO_SHORT();
                     errorCcode =
-                        UnmanagedContext.Instance.RG_GetDeviceInfo(ref portEndpoint, _currentReaderAddress,
+                        UnmanagedContext.Instance.RG_GetInfo(ref portEndpoint, _currentReaderAddress,
                             ref deviceInfo);
                     if (errorCcode != 0) {
                         throw new ApiCallException("Ошибка при запросе данных устройства", errorCcode);

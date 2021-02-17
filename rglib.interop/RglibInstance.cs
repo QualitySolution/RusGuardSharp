@@ -148,11 +148,10 @@ namespace RglibInterop {
          * @param pEndpointInfo Указатель на структуру с информацией о порте
          * @return Код ошибки
          */
-        public error_t RG_GetFoundDeviceInfo(IntPtr pDeviceEnumerator, uint deviceIndex,
-            ref RG_DEVICE_INFO pDeviceInfo) {
+        public error_t RG_GetFoundDeviceInfo(IntPtr pDeviceEnumerator, uint deviceIndex, ref RG_PORT_INFO pEndpointInfo, ref RG_DEVICE_INFO_EXT pDeviceInfoExt) {
             if (_disposed)
                 throw new ObjectDisposedException(GetType().FullName);
-            return _delegates.RG_GetFoundDeviceInfo(pDeviceEnumerator, deviceIndex, ref pDeviceInfo);
+            return _delegates.RG_GetFoundDeviceInfo(pDeviceEnumerator, deviceIndex, ref pEndpointInfo, ref pDeviceInfoExt);
         }
 
         /**
@@ -168,17 +167,30 @@ namespace RglibInterop {
         }
 
         /**
-         * @brief возвращает информацию об устройстве
-         * @param pPortEp строка подключения
+         * @brief Запрашивает и возвращает краткую информацию о считывателе.
+         * @param pEndPoint строка подключения
          * @param deviceAddress адрес устройства
          * @param pDeviceInfo не null указатель на структуру с информацией об устройстве
          * @return Код ошибки
          */
-        public error_t RG_GetDeviceInfo(ref RG_PORT_ENDPOINT pPortEp, byte deviceAddress,
-            ref RG_DEVICE_INFO pDeviceInfo) {
+        public error_t RG_GetInfo(ref RG_PORT_ENDPOINT pEndPoint, byte deviceAddress, ref RG_DEVICE_INFO_SHORT pDeviceInfo) {
             if (_disposed)
                 throw new ObjectDisposedException(GetType().FullName);
-            return _delegates.RG_GetDeviceInfo(ref pPortEp, deviceAddress, ref pDeviceInfo);
+            return _delegates.RG_GetInfo(ref pEndPoint, deviceAddress, ref pDeviceInfo);
+        }
+
+        /**
+        * @brief Запрашивает и возвращает расширенную информацию о считывателе.
+        * @param pEndPoint строка подключения
+        * @param deviceAddress адрес устройства
+        * @param pDeviceInfo не null указатель на структуру с информацией об устройстве
+        * @return Код ошибки
+        */
+        public error_t RG_GetInfoExt(ref RG_PORT_ENDPOINT pEndPoint, byte deviceAddress, ref RG_DEVICE_INFO_EXT pDeviceInfo)
+        {
+            if (_disposed)
+                throw new ObjectDisposedException(GetType().FullName);
+            return _delegates.RG_GetInfoExt(ref pEndPoint, deviceAddress, ref pDeviceInfo);
         }
 
         /**

@@ -119,8 +119,8 @@ namespace rglib.wftest {
                     while (currentDeviceAddress < 4) {
                         uint errorCode = UnmanagedContext.Instance.RG_InitDevice(ref endpoint, currentDeviceAddress);
                         if (errorCode == 0) {
-                            RG_DEVICE_INFO deviceInfo = new RG_DEVICE_INFO();
-                            if (UnmanagedContext.Instance.RG_GetDeviceInfo(ref endpoint, currentDeviceAddress,
+                            RG_DEVICE_INFO_SHORT deviceInfo = new RG_DEVICE_INFO_SHORT();
+                            if (UnmanagedContext.Instance.RG_GetInfo(ref endpoint, currentDeviceAddress,
                                     ref deviceInfo) == 0) {
                                 _availableDevices.Add(new DeviceInfoBindingWrapper(deviceInfo));
                             }

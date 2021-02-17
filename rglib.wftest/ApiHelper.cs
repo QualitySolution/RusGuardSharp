@@ -28,10 +28,10 @@ namespace rglib.wftest {
 
     public class ReaderConnectionContext {
         private readonly RG_PORT_ENDPOINT _readerPort;
-        private RG_DEVICE_INFO _deviceInfo;
+        private RG_DEVICE_INFO_SHORT _deviceInfo;
         private readonly byte _readerAddress;
 
-        public ReaderConnectionContext(RG_PORT_ENDPOINT readerPort,  byte readerAddress, RG_DEVICE_INFO deviceInfo) {
+        public ReaderConnectionContext(RG_PORT_ENDPOINT readerPort,  byte readerAddress, RG_DEVICE_INFO_SHORT deviceInfo) {
             _readerPort = readerPort;
             _readerAddress = readerAddress;
             _deviceInfo = deviceInfo;
@@ -45,7 +45,7 @@ namespace rglib.wftest {
             get { return _readerAddress; }
         }
 
-        public RG_DEVICE_INFO DeviceInfo {
+        public RG_DEVICE_INFO_SHORT DeviceInfo {
             get { return _deviceInfo; }
         }
     }
