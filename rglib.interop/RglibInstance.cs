@@ -125,17 +125,21 @@ namespace RglibInterop {
             return _delegates.RG_GetFoundEndPointInfo(endPointListHandle, listIndex, ref pEndpointInfo);
         }
 
-        /**
-         * @brief Возвращает перечислитель доступных в системе совместимых портов
-         * @param lpPortEnumerator Указатель на дескриптор перечислителя портов
-         * @param aPortTypeMask Маска типов портов
-         * @return код ошибки
-         */
-        public error_t RG_EnumerateDevices(ref RG_PORT_ENDPOINT pPortEp, ref IntPtr lpDeviceEnumerator,
-            ref uint devicesCount) {
+
+
+
+
+
+        /// <summary>
+        /// Выполняет поиск устройств по всем доступным точкам подключения.
+        /// </summary>
+        /// <param name="pDevicesListHandle">Указатель на переменную, в которомю будет записан дескриптор списка найденных устройств.</param>
+        /// <param name="pCount">Указатель на переменную, по которому будет сохранено колличество элементов в списке результатов.</param>
+        /// <returns></returns>
+        public error_t RG_FindDevices(ref IntPtr pDevicesListHandle, ref uint pCount) {
             if (_disposed)
                 throw new ObjectDisposedException(GetType().FullName);
-            return _delegates.RG_EnumerateDevices(ref pPortEp, ref lpDeviceEnumerator, ref devicesCount);
+            return _delegates.RG_FindDevices(ref pDevicesListHandle, ref pCount);
         }
 
         /**
