@@ -45,7 +45,7 @@ namespace rglib.wftest {
                     if (endPointsListHandle != IntPtr.Zero) {
                         RG_PORT_INFO portInfo = new RG_PORT_INFO();
                         uint portIndex = 0;
-                        while (UnmanagedContext.Instance.RG_GetPortInfo(endPointsListHandle, portIndex, ref portInfo) == 0) {
+                        while (UnmanagedContext.Instance.RG_GetFoundEndPointInfo(endPointsListHandle, portIndex, ref portInfo) == 0) {
                             _availablePorts.Add(new PortInfoBindingWrapper(portInfo));
                             portIndex++;
                         }

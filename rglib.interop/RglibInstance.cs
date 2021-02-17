@@ -115,14 +115,14 @@ namespace RglibInterop {
 
         /**
          * @brief 
-         * @param pPortEnumerator Дескриптор перечислителя портов
-         * @param pPortInfo Указатель на структуру с информацией о порте
+         * @param endPointListHandle Дескриптор перечислителя точек подключения
+         * @param pEndpointInfo Указатель на структуру с информацией о точке подключения
          * @return Код ошибки
          */
-        public error_t RG_GetPortInfo(IntPtr pPortEnumerator, uint portIndex, ref RG_PORT_INFO pPortInfo) {
+        public error_t RG_GetFoundEndPointInfo(IntPtr endPointListHandle, uint listIndex, ref RG_PORT_INFO pEndpointInfo) {
             if (_disposed)
                 throw new ObjectDisposedException(GetType().FullName);
-            return _delegates.RG_GetPortInfo(pPortEnumerator, portIndex, ref pPortInfo);
+            return _delegates.RG_GetFoundEndPointInfo(endPointListHandle, listIndex, ref pEndpointInfo);
         }
 
         /**
@@ -140,8 +140,8 @@ namespace RglibInterop {
 
         /**
          * @brief 
-         * @param pPortEnumerator Дескриптор перечислителя портов
-         * @param pPortInfo Указатель на структуру с информацией о порте
+         * @param endPointListHandle Дескриптор перечислителя портов
+         * @param pEndpointInfo Указатель на структуру с информацией о порте
          * @return Код ошибки
          */
         public error_t RG_GetNextDeviceInfo(IntPtr pDeviceEnumerator, uint deviceIndex,
