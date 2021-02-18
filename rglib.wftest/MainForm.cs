@@ -14,6 +14,7 @@ using RglibInterop;
 namespace rglib.wftest {
     public partial class MainForm : Form {
         private string _currentConenctionString = null;
+        private RG_ENDPOINT_TYPE _currentEndpointType;
         private byte _currentReaderAddress = 0;
         private ReaderConnectionContext _currentConnectoinContext = null;
 
@@ -91,10 +92,12 @@ namespace rglib.wftest {
                     if (!string.IsNullOrEmpty(findDialog.SelectedConnectionString) &&
                         findDialog.SelectedAddress != null) {
                         _currentConenctionString = findDialog.SelectedConnectionString;
+                        _currentEndpointType = findDialog.SelectedEndpointType;
                         _currentReaderAddress = findDialog.SelectedAddress.Value;
                     }
                     else {
                         _currentConenctionString = null;
+                        _currentEndpointType = RG_ENDPOINT_TYPE.PT_UNKNOWN;
                         _currentReaderAddress = 0;
                     }
                 }
@@ -119,6 +122,7 @@ namespace rglib.wftest {
                 UpdateConnectBlock(false);
                 try {
                     RG_ENDPOINT portEndpoint = new RG_ENDPOINT();
+                    portEndpoint.Type = _currentEndpointType;
                     portEndpoint.Address = _currentConenctionString;
 
                     uint errorCcode = UnmanagedContext.Instance.RG_InitDevice(ref portEndpoint, _currentReaderAddress);

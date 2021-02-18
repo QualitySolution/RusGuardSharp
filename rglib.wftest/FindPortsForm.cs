@@ -15,6 +15,7 @@ namespace rglib.wftest {
         private BindingList<PortInfoBindingWrapper> _availablePorts;
         private BindingList<DeviceInfoBindingWrapper> _availableDevices;
         private string _selectedConnectionString;
+        private RG_ENDPOINT_TYPE _selectedEndpointType;
         private byte? _selectedAddress;
 
         public FindPortsForm() {
@@ -65,13 +66,9 @@ namespace rglib.wftest {
             groupBox1.Enabled = true;
         }
 
-        public string SelectedConnectionString {
-            get { return _selectedConnectionString; }
-        }
-
-        public byte? SelectedAddress {
-            get { return _selectedAddress; }
-        }
+        public RG_ENDPOINT_TYPE SelectedEndpointType => _selectedEndpointType;
+        public string SelectedConnectionString => _selectedConnectionString;
+        public byte? SelectedAddress => _selectedAddress;
 
         private void CheckBoxCheckedStateChanged(object sender, EventArgs e) {
             UpdatePortList(findUsbHid.Checked, findSerial.Checked);
@@ -90,6 +87,7 @@ namespace rglib.wftest {
             if (connectionsBox.SelectedIndex >= 0 && connectionsBox.SelectedItem is PortInfoBindingWrapper) {
                 PortInfoBindingWrapper wrapper = connectionsBox.SelectedItem as PortInfoBindingWrapper;
                 _selectedConnectionString = wrapper.ConnectionString;
+                _selectedEndpointType = wrapper.PortType;
             }
 
             _selectedAddress = 0;
