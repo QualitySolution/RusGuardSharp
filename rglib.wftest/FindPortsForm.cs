@@ -114,6 +114,7 @@ namespace rglib.wftest {
                 PortInfoBindingWrapper wrapper = connectionsBox.SelectedItem as PortInfoBindingWrapper;
                 if (wrapper != null) {
                     RG_ENDPOINT endpoint = new RG_ENDPOINT();
+                    endpoint.Type = wrapper.PortType;
                     endpoint.Address = wrapper.ConnectionString;
                     byte currentDeviceAddress = 0;
                     while (currentDeviceAddress < 4) {
