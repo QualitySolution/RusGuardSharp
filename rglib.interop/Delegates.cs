@@ -49,7 +49,7 @@ namespace RglibInterop {
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     internal delegate error_t RG_SetCardsMaskDelegate(
-        [In] ref RG_ENDPOINT pEndpoint, 
+        [In] ref RG_ENDPOINT pEndpoint,
         byte deviceAddress,
         byte cardfamilyMask);
 
@@ -62,17 +62,16 @@ namespace RglibInterop {
     internal delegate error_t RG_WriteProfileDelegate(
         [In] ref RG_ENDPOINT pEndpoint,
         byte deviceAddress,
-        byte profileNumber, 
+        byte profileNumber,
         byte blockNum,
         [In] ref RG_PROFILE_DATA profileData);
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     internal delegate error_t RG_WriteCodogrammDelegate(
-        [In] ref RG_ENDPOINT pEndpointp, 
-        byte deviceAddress, 
+        [In] ref RG_ENDPOINT pEndpointp,
+        byte deviceAddress,
         byte codogrammNumber,
-        byte codogrammLengthBits, 
-        uint codogrammBody);
+        [In] ref RG_CODOGRAMM pCodogramm);
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     internal delegate error_t RG_StartCodogrammDelegate(
@@ -171,8 +170,7 @@ namespace RglibInterop {
                 [In] ref RG_ENDPOINT pEndpointp,
                 byte deviceAddress,
                 byte codogrammNumber,
-                byte codogrammLengthBits,
-                uint codogrammBody);
+                [In] ref RG_CODOGRAMM pCodogramm);
 
             [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
             internal static extern error_t RG_StartCodogramm(

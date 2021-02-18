@@ -324,6 +324,23 @@ namespace RglibInterop {
     }
 
     /// <summary>
+    /// Структура определяющая длинну и тело кодограммы
+    /// </summary>
+    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi, Pack = 1, Size = 5)]
+    public struct RG_CODOGRAMM
+    {
+        /// <summary>
+        /// Длинна кодограммы в битах (0...32, 1бит = 100мс индикации)
+        /// </summary>
+        public byte Length;
+
+        /// <summary>
+        /// Тело кодограммы, (1бит = 100мс индикации)
+        /// </summary>
+        public uint Body;
+    }
+
+    /// <summary>
     /// Текущий статус устройства
     /// </summary>
     public enum RG_DEVICE_STATUS_TYPE : byte {

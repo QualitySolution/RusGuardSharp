@@ -264,15 +264,13 @@ namespace RglibInterop {
          * @brief Записывает кодограмму (схему андикации) в память устройства
          * @param pEndpoint указатель на структуру с параметрами подключения
          * @param deviceAddress адрес устройства
-         * @param codogrammLengthBits длина кодограммы в битах ()макс 32)
-         * @param codogrammBody тело кодограммы (1HS бит = 100мс)
+         * @param codogramm кодограмма
          * @return Код ошибки
          */
-        public error_t RG_WriteCodogramm(ref RG_ENDPOINT pEndpointp, byte deviceAddress, byte codogrammNumber,
-            byte codogrammLengthBits, uint codogrammBody) {
+        public error_t RG_WriteCodogramm(ref RG_ENDPOINT pEndpointp, byte deviceAddress, byte codogrammNumber, ref RG_CODOGRAMM pCodogramm) {
             if (_disposed)
                 throw new ObjectDisposedException(GetType().FullName);
-            return _delegates.RG_WriteCodogramm(ref pEndpointp, deviceAddress, codogrammNumber, codogrammLengthBits, codogrammBody);
+            return _delegates.RG_WriteCodogramm(ref pEndpointp, deviceAddress, codogrammNumber, ref pCodogramm);
         }
 
         /**

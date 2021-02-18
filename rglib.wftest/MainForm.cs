@@ -196,10 +196,12 @@ namespace rglib.wftest {
         private void WriteCodogramm(CodogrammData data) {
             try {
                 RG_ENDPOINT portEndpoin = _currentConnectoinContext.ReaderPort;
-                logger.Debug($"portEndpoin = {portEndpoin.Type} : {portEndpoin.Address}");
                 byte address = _currentConnectoinContext.ReaderAddress;
-                uint errorCode = UnmanagedContext.Instance.RG_WriteCodogramm(ref portEndpoin, address, data.Number,
-                    data.LengthBits, data.CodogrammBody);
+                RG_CODOGRAMM codogram = new RG_CODOGRAMM {
+                    Length = data.LengthBits,
+                    Body = data.CodogrammBody
+                };
+                uint errorCode = UnmanagedContext.Instance.RG_WriteCodogramm(ref portEndpoin, address, data.Number, ref codogram);
                 if (errorCode != 0) {
                     throw new ApiCallException("Ошибка при записи кодограммы", errorCode);
                 }
