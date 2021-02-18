@@ -24,6 +24,7 @@ namespace rglib.wftest {
         private int _polling = 0;
         private ManualResetEvent _pollStopEvent = new ManualResetEvent(false);
 
+        private static NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
 
         public MainForm() {
             InitializeComponent();
@@ -74,7 +75,7 @@ namespace rglib.wftest {
             priotiryBox.SelectedIndex = 0;
 
             EnableDisableReaderDataGroup();
-
+            logger.Debug("Тестовое приложение запущено");
         }
 
         private void OnFormLoad(object sender, EventArgs e) {
@@ -127,21 +128,27 @@ namespace rglib.wftest {
 
                     uint errorCcode = UnmanagedContext.Instance.RG_InitDevice(ref portEndpoint, _currentReaderAddress);
                     if (errorCcode != 0) {
+                        logger.Error($"Error in RG_InitDevice = {errorCcode}");
                         throw new ApiCallException("Ошибка при подключении к устройству", errorCcode);
                     }
+                    logger.Debug("Устройство проинициализировано");
 
                     RG_DEVICE_INFO_SHORT deviceInfo = new RG_DEVICE_INFO_SHORT();
                     errorCcode =
                         UnmanagedContext.Instance.RG_GetInfo(ref portEndpoint, _currentReaderAddress,
                             ref deviceInfo);
                     if (errorCcode != 0) {
+                        logger.Error($"Error in RG_GetInfo = {errorCcode}");
                         throw new ApiCallException("Ошибка при запросе данных устройства", errorCcode);
                     }
+
+                    logger.Debug("Устройство опрошено");
 
                     _currentConnectoinContext =
                         new ReaderConnectionContext(portEndpoint, _currentReaderAddress, deviceInfo);
 
                     foreach (CodogrammData defaultCodogramm in _defaultCodogramms) {
+                        logger.Debug($"Пишем кодограмму {defaultCodogramm.Name}");
                         try {
                             WriteCodogramm(defaultCodogramm);
                         }
@@ -189,6 +196,7 @@ namespace rglib.wftest {
         private void WriteCodogramm(CodogrammData data) {
             try {
                 RG_ENDPOINT portEndpoin = _currentConnectoinContext.ReaderPort;
+                logger.Debug($"portEndpoin = {portEndpoin.Type} : {portEndpoin.Address}");
                 byte address = _currentConnectoinContext.ReaderAddress;
                 uint errorCode = UnmanagedContext.Instance.RG_WriteCodogramm(ref portEndpoin, address, data.Number,
                     data.LengthBits, data.CodogrammBody);
